@@ -21,7 +21,7 @@ const Header = () => {
               Home
             </Link>
             <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
-              About us
+              About Us
             </Link>
             <Link href="/pillars" className="text-gray-600 hover:text-gray-900 transition-colors">
               Our Pillars

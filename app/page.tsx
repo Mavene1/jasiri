@@ -1,12 +1,12 @@
 import Header from '@/components/Header';
-import Hero from '@/components/HeroSection';
-import About from '@/components/About';
-import Pillars from '@/components/Pillars';
-import Campaigns from '@/components/Activities';
-import Stats from '@/components/Stats';
-import Blog from '@/components/Blog';
+import Hero from '@/components/home/HeroSection';
+import About from '@/components/home/About';
+import Pillars from '@/components/home/Pillars';
+import Campaigns from '@/components/home/Activities';
+import Stats from '@/components/home/Stats';
+import Blog from '@/components/home/Blog';
 import Footer from '@/components/Footer';
-import CTASection from '@/components/CTASection';
+import CTASection from '@/components/home/CTASection';
 
 export default function Home() {
   return (

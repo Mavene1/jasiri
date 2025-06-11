@@ -1,8 +1,11 @@
 import React from 'react'
+import PillarsPage from '@/components/pillars/PillarsPage'
 
 const page = () => {
   return (
-    <div>Pillars</div>
+    <div>
+      <PillarsPage />
+    </div>
   )
 }
 
