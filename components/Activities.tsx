@@ -40,7 +40,7 @@ const Activities = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="text-orange-400 text-md font-semibold uppercase tracking-wider mb-4 block">
-            Campaigns
+          Activities And Campaigns
           </span>
           <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900">
             Together For Peace: Join Our Mission

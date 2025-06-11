@@ -8,10 +8,12 @@ const CTASection = () => {
     <section className="relative py-20 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <img
-          src="/api/placeholder/1400/600"
+        <Image
+          src="/images/4.png"
           alt="Volunteers working together on food donation"
           className="w-full h-full object-cover"
+          width={1400}
+          height={600}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-800/75 to-emerald-900/80"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
