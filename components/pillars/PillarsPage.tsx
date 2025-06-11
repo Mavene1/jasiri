@@ -1,8 +1,11 @@
 import React from 'react'
+import Pillars from '../home/Pillars'
 
 const PillarsPage = () => {
   return (
-    <div>PillarsPage</div>
+    <div>
+      <Pillars />
+    </div>
   )
 }
 

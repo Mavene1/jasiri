@@ -1,4 +1,6 @@
+import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Activities = () => {
   const campaigns = [
@@ -96,7 +98,7 @@ const Activities = () => {
                 </div>
 
                 {/* Button */}
-                <button className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center group/btn">
+                <button className="w-full bg-green-600 cursor-pointer text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center group/btn">
                   {campaign.buttonText}
                   <svg 
                     className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" 
@@ -111,6 +113,16 @@ const Activities = () => {
             </div>
           ))}
         </div>
+        {/* View All Button */}
+        <Link
+          href="/activities">
+          <div className="text-center">
+            <button className="inline-flex cursor-pointer items-center gap-3 bg-emerald-600 text-white px-8 py-4 mt-12 rounded-full font-semibold hover:bg-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <span>View All Activities</span>
+              <ExternalLink className="w-5 h-5" />
+            </button>
+          </div>
+        </Link>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const AboutSection = () => {
   return (
@@ -22,7 +23,7 @@ const AboutSection = () => {
                 <br />
                 <span className="text-blue-900">Against Violent Extremism</span>
               </h2>
-              
+
               <p className="text-lg text-gray-600 leading-relaxed">
                 At Jasiri, we are dedicated to creating secure environments where communities are empowered to resist radicalization and violent extremism. Through evidence-based programs and a community-driven approach, we strengthen social cohesion, promote dialogue, and build lasting peace across Kenya.
               </p>
@@ -33,11 +34,12 @@ const AboutSection = () => {
             </div>
 
             {/* Learn More Button */}
-            <div>
-              <button className="bg-green-600 text-white px-8 py-3 rounded-md font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <Link
+              href="/about">
+              <button className="bg-green-600 text-white px-8 py-3 cursor-pointer rounded-md font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                 Learn more
               </button>
-            </div>
+            </Link>
           </div>
 
           {/* Right Content - Image with Play Button */}
@@ -49,16 +51,16 @@ const AboutSection = () => {
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-105"
               />
-              
+
               {/* Play Button Overlay */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <button className="w-16 h-16 lg:w-20 lg:h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center shadow-2xl hover:bg-opacity-100 transition-all duration-300 transform hover:scale-110 group">
-                  <svg 
-                    className="w-6 h-6 lg:w-8 lg:h-8 text-gray-800 ml-1 group-hover:text-blue-600 transition-colors" 
-                    fill="currentColor" 
+                  <svg
+                    className="w-6 h-6 lg:w-8 lg:h-8 text-gray-800 ml-1 group-hover:text-blue-600 transition-colors"
+                    fill="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M8 5v14l11-7z"/>
+                    <path d="M8 5v14l11-7z" />
                   </svg>
                 </button>
               </div>

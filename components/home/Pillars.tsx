@@ -1,4 +1,5 @@
 import { BookOpen, Users, FileText, BarChart3, Eye, Search } from 'lucide-react';
+import Link from 'next/link';
 
 const Pillars = () => {
   const pillars = [
@@ -89,10 +90,10 @@ const Pillars = () => {
                 </p>
                 <button className="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center group/btn">
                   {pillar.link}
-                  <svg 
-                    className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" 
-                    fill="none" 
-                    stroke="currentColor" 
+                  <svg
+                    className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -104,14 +105,17 @@ const Pillars = () => {
         </div>
 
         {/* View All Button */}
-        <div className="text-center">
-          <button className="bg-green-600 text-white px-8 py-4 rounded-full font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center mx-auto">
-            View All Programs
-            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </button>
-        </div>
+        <Link
+          href="/pillars">
+          <div className="text-center">
+            <button className="bg-green-600 cursor-pointer text-white px-8 py-4 rounded-full font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center mx-auto">
+              View All Programs
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+          </div>
+        </Link>
       </div>
     </section>
   );

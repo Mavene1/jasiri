@@ -1,6 +1,14 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
+  const pathname = usePathname();
+  
+  const isActive = (path: string) => {
+    return pathname === path || (path !== '/' && pathname.startsWith(path));
+  };
   return (
     <header className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,19 +25,34 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link href="/" className="text-green-600 font-medium hover:text-green-700 transition-colors">
+            <Link
+              href="/"
+              className={`${isActive('/') ? 'text-green-600' : 'text-gray-600'} font-medium hover:text-green-700 transition-colors`}
+            >
               Home
             </Link>
-            <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link
+              href="/about"
+              className={`${isActive('/about') ? 'text-green-600' : 'text-gray-600'} hover:text-gray-900 transition-colors`}
+            >
               About Us
             </Link>
-            <Link href="/pillars" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link
+              href="/pillars"
+              className={`${isActive('/pillars') ? 'text-green-600' : 'text-gray-600'} hover:text-gray-900 transition-colors`}
+            >
               Our Pillars
             </Link>
-            <Link href="/activities" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link
+              href="/activities"
+              className={`${isActive('/activities') ? 'text-green-600' : 'text-gray-600'} hover:text-gray-900 transition-colors`}
+            >
               Activities
             </Link>
-            <Link href="/blogs" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link
+              href="/blogs"
+              className={`${isActive('/blogs') ? 'text-green-600' : 'text-gray-600'} hover:text-gray-900 transition-colors`}
+            >
               Blogs
             </Link>
           </nav>
