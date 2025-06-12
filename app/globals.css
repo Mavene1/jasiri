@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-primary: #1D4ED8; /* RGB values for #1D4ED8 */
+  --color-secondary: #F59E0B;
+  --color-accent: #10b981;
+  --color-background: #F3F4F6;
+  --color-surface: #FFFFFF;
+  --color-muted: #9CA3AF;
 }
 
 @theme inline {
@@ -24,6 +30,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-futura);
 }
+
+
 
 * {font-display: block;}
 @font-face {

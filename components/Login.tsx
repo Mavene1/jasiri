@@ -147,7 +147,7 @@ const Login: React.FC<LoginProps> = () => {
                                     <button
                                         type="button"
                                         onClick={(): void => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        className="absolute cursor-pointer right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                                     >
                                         {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                     </button>
@@ -161,7 +161,7 @@ const Login: React.FC<LoginProps> = () => {
                                         type="checkbox"
                                         checked={rememberMe}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRememberMe(e.target.checked)}
-                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
                                     />
                                     <span className="ml-2 text-sm text-gray-600">Keep me signed in</span>
                                 </label>
@@ -173,7 +173,7 @@ const Login: React.FC<LoginProps> = () => {
                             {/* Login Button */}
                             <button
                                 onClick={handleLogin}
-                                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-200 shadow-lg"
+                                className="w-full bg-gradient-to-r cursor-pointer from-blue-600 to-blue-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-200 shadow-lg"
                             >
                                 Secure Login
                             </button>
@@ -193,7 +193,7 @@ const Login: React.FC<LoginProps> = () => {
                             </p>
                             <button
                                 onClick={handleRegisterRedirect}
-                                className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-green-700 hover:to-green-800 transform hover:scale-105 transition-all duration-200 shadow-lg"
+                                className="w-full cursor-pointer bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-green-700 hover:to-green-800 transform hover:scale-105 transition-all duration-200 shadow-lg"
                             >
                                 Apply for Membership
                             </button>

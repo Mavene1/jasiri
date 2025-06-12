@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Jasiri",
-  description: "Empowering through technology",
+  description: "Empowering community through technology",
 };
 
 export default function RootLayout({
