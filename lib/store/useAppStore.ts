@@ -17,6 +17,7 @@ interface AppState {
   
   // Actions
   setUser: (user: User | null) => void;
+  logout: (user: User | null) => void;
   setCampaigns: (campaigns: Campaign[]) => void;
   setBlogPosts: (posts: BlogPost[]) => void;
   setLoading: (loading: boolean) => void;
@@ -37,6 +38,7 @@ export const useAppStore = create<AppState>()(
 
       // Actions
       setUser: (user) => set({ user, isAuthenticated: !!user }),
+      logout: () => set({ user: null}),
       setCampaigns: (campaigns) => set({ campaigns }),
       setBlogPosts: (blogPosts) => set({ blogPosts }),
       setLoading: (isLoading) => set({ isLoading }),
