@@ -115,7 +115,7 @@ const Activities = () => {
         </div>
         {/* View All Button */}
         <Link
-          href="/activities">
+          href="/dashboard/activities">
           <div className="text-center">
             <button className="inline-flex cursor-pointer items-center gap-3 bg-emerald-600 text-white px-8 py-4 mt-12 rounded-full font-semibold hover:bg-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
               <span>View All Activities</span>

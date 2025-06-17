@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({user }) => {
             type="text"
             placeholder="Find something"
             className="w-full h-10 pl-10 pr-4 rounded-lg bg-white/70 
-                     border border-[#D8F3D9] text-sm 
+                     border border-[#D8F3D9] text-sm text-[#35A839]
                      focus:outline-none focus:ring-2 focus:ring-[#35A839] focus:border-transparent
                      placeholder:text-[#35A839]/50"
           />
@@ -49,12 +49,12 @@ const Header: React.FC<HeaderProps> = ({user }) => {
 
       {/* Right Actions */}
       <div className="flex items-center gap-4">
-        <button className="p-2 text-[#1976d2] hover:bg-[#D8F3D9] rounded-lg transition-colors
+        <button className="p-2 text-[#1976d2] hover:bg-[#D8F3D9] rounded-lg transition-colors cursor-pointer
                          relative group">
           <HelpCircle size={20} />
           <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-[#E93755] rounded-full"></span>
         </button>
-        <button className="p-2 text-[#1976d2] hover:bg-[#D8F3D9] rounded-lg transition-colors
+        <button className="p-2 text-[#1976d2] hover:bg-[#D8F3D9] rounded-lg transition-colors cursor-pointer
                          relative group">
           <Bell size={20} />
           <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#FFC700] rounded-full

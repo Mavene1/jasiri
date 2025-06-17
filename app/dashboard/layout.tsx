@@ -4,15 +4,14 @@ import { redirect } from 'next/navigation';
 import Header from '@/components/dashboard/Header'
 import Sidebar from '@/components/dashboard/Sidebar'
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-    //   const token = cookies().get('token')?.value;
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+      const token = (await cookies()).get('token')?.value;
 
-    //   if (!token) {
-    //     redirect('/get-involved');
-    //   }
+      if (!token) {
+        redirect('/get-involved');
+      }
 
-    //   return <section>{children}</section>;
-    return (
+      return (
         <div className="flex h-screen bg-gray-100">
             <Sidebar />
             <div className="flex-1 flex flex-col">

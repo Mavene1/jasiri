@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { createJSONStorage, persist, devtools } from 'zustand/middleware';
 import type { User, Campaign, BlogPost } from '@/types';
 
 interface AppState {
@@ -17,7 +17,7 @@ interface AppState {
   
   // Actions
   setUser: (user: User | null) => void;
-  logout: (user: User | null) => void;
+  logout: () => void;
   setCampaigns: (campaigns: Campaign[]) => void;
   setBlogPosts: (posts: BlogPost[]) => void;
   setLoading: (loading: boolean) => void;
@@ -26,7 +26,7 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>()(
-  devtools(
+  persist(
     (set) => ({
       // Initial state
       user: null,
@@ -47,6 +47,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'jasiri-store',
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

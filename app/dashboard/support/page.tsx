@@ -1,11 +1,10 @@
-
 import UnderDevelopment from '@/components/UnderDevelopment'
 import React from 'react'
 
 const page = () => {
     return (
-        <div className="min-h-screen bg-white">
-            <UnderDevelopment title="Dashboard" />
+        <div>
+            <UnderDevelopment title="Support" />
         </div>
     )
 }

@@ -65,6 +65,7 @@ export const dummyVolunteers: User[] = [
   {
     id: '1',
     name: 'John Doe',
+    username: 'johndoe',
     email: 'john@example.com',
     avatar: '/api/placeholder/40/40',
     role: 'volunteer',
@@ -74,6 +75,7 @@ export const dummyVolunteers: User[] = [
   {
     id: '2',
     name: 'Jane Smith',
+    username: 'janesmith',
     email: 'jane@example.com',
     avatar: '/api/placeholder/40/40',
     role: 'volunteer',
