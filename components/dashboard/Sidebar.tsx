@@ -132,7 +132,7 @@ const Sidebar = () => {
           key={"/dashboard/activities"}
           href="/dashboard/activities"
           className={`flex items-center gap-2 px-3 py-2 pl-6 text-gray-700 hover:bg-[#E3F2FD] rounded-lg cursor-pointer ${isCollapsed ? "justify-center" : ""
-            }${isActive("/dashboard/activities")
+            }${isActive("/dashboard/activities") || pathname.startsWith("/dashboard/activities")
               ? "bg-[#E3F2FD] text-[#2CB34A]"
               : "text-gray-700 hover:bg-[#E3F2FD]"
             }`}
@@ -142,9 +142,9 @@ const Sidebar = () => {
           {!isCollapsed && (
             <>
               <span>Activities</span>
-              {isActive("/dashboard/activities") && (
+              {isActive("/dashboard/activities") || pathname.startsWith("/dashboard/activities") ? (
                 <div className="ml-auto w-1.5 h-1.5 rounded-full bg-[#2CB34A]" />
-              )}
+              ) : ""}
             </>
           )}
         </Link>
