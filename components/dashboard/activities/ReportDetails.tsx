@@ -19,7 +19,7 @@ interface ReportDetailsProps {
 export default function ReportDetails({ activityId, reportId }: ReportDetailsProps) {
     const router = useRouter()
 
-    const [activities, setActivities] = useState<ActivityData[]>([
+    const [activities] = useState<ActivityData[]>([
         {
             activityId: "395a2fbe-8576-45c0-b832-a1d9bbe7b75d",
             title: "Youth Counter Extremism Workshop",
@@ -75,7 +75,7 @@ export default function ReportDetails({ activityId, reportId }: ReportDetailsPro
     ]);
 
     // Sample reports data
-    const [reports, setReports] = useState<ActivityReport[]>([
+    const [reports] = useState<ActivityReport[]>([
         {
             reportId: "report-001",
             activityId: "395a2fbe-8576-45c0-b832-a1d9bbe7b75d",

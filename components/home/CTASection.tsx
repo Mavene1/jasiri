@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Heart, Users, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube, Send, ArrowRight, Linkedin, Globe } from 'lucide-react';
+import { Heart, Users } from 'lucide-react';
 
 // Call-to-Action Section Component
 const CTASection = () => {
@@ -43,7 +43,7 @@ const CTASection = () => {
             </h2>
             <p className="text-xl md:text-2xl text-slate-200 max-w-4xl mx-auto leading-relaxed">
               Every action counts. Whether you volunteer your time or donate resources, 
-              you're helping us bring hope, health, and happiness to communities in need.
+              you are helping us bring hope, health, and happiness to communities in need.
             </p>
           </div>
 

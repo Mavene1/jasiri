@@ -3,7 +3,7 @@
 
 'use client'
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import {
     Plus,
     X,
@@ -13,16 +13,11 @@ import {
     Edit,
     Trash2,
     Eye,
-    Filter,
     Calendar,
     User,
     Activity,
     MapPin,
     Building,
-    FileText,
-    Download,
-    ArrowLeft,
-    Upload
 } from 'lucide-react';
 import {
     useReactTable,
@@ -145,9 +140,32 @@ export default function ActivitiesList() {
         }
     ]);
 
+    const handleViewReports = useCallback((activityId: string) => {
+        router.push(`/dashboard/activities/${activityId}`);
+    }, [router]);
+
+    const handleEditActivity = useCallback((activity: ActivityData) => {
+        setEditingActivity(activity);
+        setIsEditModalOpen(true);
+        // Populate form with existing data
+        setValue('title', activity.title);
+        setValue('description', activity.description);
+        setValue('pillar', activity.pillar);
+        setValue('county', activity.county);
+        setValue('csoId', activity.csoId);
+        setValue('scheduledDate', activity.scheduledDate);
+        setValue('location', activity.location);
+    }  , [setValue]);
+
+    const handleDeleteClick = (activityId: string) => {
+        setDeletingActivityId(activityId);
+        setIsDeleteModalOpen(true);
+    };
+
 
     const columnHelper = createColumnHelper<ActivityData>();
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columns = useMemo<ColumnDef<ActivityData, any>[]>(
         () => [
             columnHelper.accessor('title', {
@@ -274,7 +292,7 @@ export default function ActivitiesList() {
                 ),
             }),
         ],
-        []
+        [columnHelper, handleEditActivity, handleViewReports]
     );
 
     const table = useReactTable({
@@ -295,28 +313,6 @@ export default function ActivitiesList() {
             },
         },
     });
-
-    const handleViewReports = (activityId: string) => {
-        router.push(`/dashboard/activities/${activityId}`);
-    };
-
-    const handleEditActivity = (activity: ActivityData) => {
-        setEditingActivity(activity);
-        setIsEditModalOpen(true);
-        // Populate form with existing data
-        setValue('title', activity.title);
-        setValue('description', activity.description);
-        setValue('pillar', activity.pillar);
-        setValue('county', activity.county);
-        setValue('csoId', activity.csoId);
-        setValue('scheduledDate', activity.scheduledDate);
-        setValue('location', activity.location);
-    };
-
-    const handleDeleteClick = (activityId: string) => {
-        setDeletingActivityId(activityId);
-        setIsDeleteModalOpen(true);
-    };
 
     const handleDeleteConfirm = () => {
         setActivities(activities.filter(activity => activity.activityId !== deletingActivityId));

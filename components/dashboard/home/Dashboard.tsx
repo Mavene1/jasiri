@@ -3,14 +3,12 @@
 import React, { useState } from 'react';
 import {
     Users,
-    Truck,
     FileText,
     Receipt,
     TrendingUp,
     TrendingDown,
     Plus,
     Trash2,
-    MoreHorizontal,
     PieChart
 } from 'lucide-react';
 import {
@@ -19,8 +17,7 @@ import {
     XAxis,
     YAxis,
     CartesianGrid,
-    ResponsiveContainer,
-    Legend
+    ResponsiveContainer
 } from 'recharts';
 import { ActivityData } from '../activities/ActivitiesList';
 
@@ -33,13 +30,13 @@ interface MetricCardProps {
     iconBg: string;
 }
 
-interface AccountBalance {
-    id: number;
-    bank: string;
-    holderName: string;
-    balance: string;
-    status: 'Active' | 'Paused' | 'Canceled';
-}
+// interface AccountBalance {
+//     id: number;
+//     bank: string;
+//     holderName: string;
+//     balance: string;
+//     status: 'Active' | 'Paused' | 'Canceled';
+// }
 
 const MetricCard: React.FC<MetricCardProps> = ({
     title,
@@ -84,14 +81,14 @@ const Dashboard: React.FC = () => {
         { day: 'Fri', income: 1500, expense: 650 },
     ];
 
-    const accountBalances: AccountBalance[] = [
-        { id: 1, bank: 'Maybank', holderName: 'Cash', balance: 'RM521,611.20', status: 'Active' },
-        { id: 2, bank: 'Ocbc Bank', holderName: 'Carissa', balance: 'RM160,156.00', status: 'Paused' },
-        { id: 3, bank: 'RHB Bank', holderName: 'Renee', balance: 'RM52,229.00', status: 'Canceled' },
-        { id: 4, bank: 'Public Bank', holderName: 'Preston', balance: 'RM82,786.00', status: 'Active' },
-        { id: 5, bank: 'UOB Bank', holderName: 'Bowman', balance: 'RM105,150.00', status: 'Paused' },
-        { id: 6, bank: 'Ambank', holderName: 'Wendy', balance: 'Rm5,484.40', status: 'Canceled' },
-    ];
+    // const accountBalances: AccountBalance[] = [
+    //     { id: 1, bank: 'Maybank', holderName: 'Cash', balance: 'RM521,611.20', status: 'Active' },
+    //     { id: 2, bank: 'Ocbc Bank', holderName: 'Carissa', balance: 'RM160,156.00', status: 'Paused' },
+    //     { id: 3, bank: 'RHB Bank', holderName: 'Renee', balance: 'RM52,229.00', status: 'Canceled' },
+    //     { id: 4, bank: 'Public Bank', holderName: 'Preston', balance: 'RM82,786.00', status: 'Active' },
+    //     { id: 5, bank: 'UOB Bank', holderName: 'Bowman', balance: 'RM105,150.00', status: 'Paused' },
+    //     { id: 6, bank: 'Ambank', holderName: 'Wendy', balance: 'Rm5,484.40', status: 'Canceled' },
+    // ];
 
     const getStatusColor = (status: string) => {
         switch (status) {
@@ -110,7 +107,7 @@ const Dashboard: React.FC = () => {
         }
     };
 
-    const [activities, setActivities] = useState<ActivityData[]>([
+    const [activities] = useState<ActivityData[]>([
             {
                 activityId: "395a2fbe-8576-45c0-b832-a1d9bbe7b75d",
                 title: "Youth Counter Extremism Workshop",

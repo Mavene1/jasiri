@@ -5,15 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
-  Calendar,
-  FileText,
-  Package,
   PieChart,
   Users,
-  // UserCircle,
   Settings,
   HelpCircle,
-  // ChevronDown,
   Zap,
   CheckCircle,
   PanelLeftOpen,

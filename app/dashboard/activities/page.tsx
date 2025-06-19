@@ -1,4 +1,4 @@
-import Activities from '@/components/dashboard/activities/Activities'
+// import Activities from '@/components/dashboard/activities/Activities'
 import ActivitiesList from '@/components/dashboard/activities/ActivitiesList'
 import React from 'react'
 

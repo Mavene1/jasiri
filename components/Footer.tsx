@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { Heart, Users, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube, Send, ArrowRight, Linkedin, Globe } from 'lucide-react';
+import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube, Send, ArrowRight, Linkedin } from 'lucide-react';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -65,7 +65,7 @@ const Footer = () => {
               {/* Description */}
               <p className="text-slate-300 leading-relaxed max-w-md">
                 Jasiri: Bringing People Together to Create Lasting Change. 
-                We're dedicated to transforming communities through healthcare, education, 
+                We are dedicated to transforming communities through healthcare, education, 
                 clean water, and emergency relief efforts.
               </p>
   

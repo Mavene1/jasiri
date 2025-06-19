@@ -20,7 +20,7 @@ export default function ActivityDetails({ activityId }: ActivityDetailsProps) {
     const router = useRouter();
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
-    const [activities, setActivities] = useState<ActivityData[]>([
+    const [activities] = useState<ActivityData[]>([
         {
             activityId: "395a2fbe-8576-45c0-b832-a1d9bbe7b75d",
             title: "Youth Counter Extremism Workshop",

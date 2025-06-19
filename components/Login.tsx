@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useTransition } from 'react';
@@ -5,10 +6,8 @@ import { useForm } from 'react-hook-form';
 import { Eye, EyeOff, Shield, Users, Lock, Mail, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import { useAppStore } from '@/lib/store/useAppStore';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { loginAction } from '@/lib/actions/auth';
-import { User } from '@/types';
 
 interface LoginFormData {
     email: string;
@@ -16,9 +15,7 @@ interface LoginFormData {
     rememberMe: boolean;
 }
 
-interface LoginProps { }
-
-const Login: React.FC<LoginProps> = () => {
+const Login: React.FC = () => {
     const currentYear = new Date().getFullYear();
     const [showPassword, setShowPassword] = useState(false);
     const [isPending, startTransition] = useTransition();
@@ -32,6 +29,8 @@ const Login: React.FC<LoginProps> = () => {
         watch,
         formState: { errors },
     } = useForm<LoginFormData>();
+
+    console.log(errors, watch())
 
     const onSubmit = async (data: LoginFormData) => {
         startTransition(async () => {
@@ -90,7 +89,7 @@ const Login: React.FC<LoginProps> = () => {
 
                     <div className="mt-8 text-center">
                         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                            "Building Safer Communities Together"
+                            &quot;Building Safer Communities Together&quot;
                         </h2>
                         <p className="text-gray-600 max-w-md">
                             Join our mission to combat terrorism through community engagement,
