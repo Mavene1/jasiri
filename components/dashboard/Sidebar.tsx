@@ -30,7 +30,6 @@ const Sidebar = () => {
 
   const logout = useAppStore((state) => state.logout);
   const user = useAppStore((state) => state.user);
-  // Then call logout() when needed
 
   const handleLogout = async () => {
     startTransition(async () => {

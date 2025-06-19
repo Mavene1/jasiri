@@ -2,14 +2,11 @@
 
 import React from 'react';
 import { Search, Bell, HelpCircle, Command  } from 'lucide-react';
+import { useAppStore } from '@/lib/store/useAppStore';
 
-interface HeaderProps {
-  // setIsLogin: (value: boolean) => void;
-  user: string;
-}
-
-const Header: React.FC<HeaderProps> = ({user }) => {
+const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const user = useAppStore((state) => state.user);
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -28,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({user }) => {
       {/* Welcome Section */}
       <div className="flex flex-col">
         <span className="text-xs text-gray-500">Welcome,</span>
-        <span className="text-sm font-medium text-[#1976d2]">{user}</span>
+        <span className="text-sm font-medium text-[#1976d2]">{user?.name}</span>
       </div>
 
       {/* Search Bar */}

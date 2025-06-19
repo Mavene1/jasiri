@@ -1,15 +1,11 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import type { User, Campaign, BlogPost } from '@/types';
+import type { User } from '@/types';
 
 interface AppState {
   // User state
   user: User | null;
   isAuthenticated: boolean;
-  
-  // Data state
-  campaigns: Campaign[];
-  blogPosts: BlogPost[];
   
   // UI state
   isLoading: boolean;
@@ -18,8 +14,6 @@ interface AppState {
   // Actions
   setUser: (user: User | null) => void;
   logout: () => void;
-  setCampaigns: (campaigns: Campaign[]) => void;
-  setBlogPosts: (posts: BlogPost[]) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   clearError: () => void;
@@ -31,16 +25,12 @@ export const useAppStore = create<AppState>()(
       // Initial state
       user: null,
       isAuthenticated: false,
-      campaigns: [],
-      blogPosts: [],
       isLoading: false,
       error: null,
 
       // Actions
       setUser: (user) => set({ user, isAuthenticated: !!user }),
       logout: () => set({ user: null}),
-      setCampaigns: (campaigns) => set({ campaigns }),
-      setBlogPosts: (blogPosts) => set({ blogPosts }),
       setLoading: (isLoading) => set({ isLoading }),
       setError: (error) => set({ error }),
       clearError: () => set({ error: null }),
