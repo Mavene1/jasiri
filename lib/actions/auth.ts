@@ -5,7 +5,7 @@ import { User } from '@/types';
 import { cookies } from 'next/headers';
 
 export async function loginAction({ email, password }: { email: string; password: string }) {
-  if (email === 'maveneomondi111@gmail.com' && password === '123456') {
+  if (email === 'example@gmail.com' && password === '123456') {
     (await cookies()).set('token', 'valid-jwt-token', {
       httpOnly: true,
       secure: true,
@@ -17,7 +17,7 @@ export async function loginAction({ email, password }: { email: string; password
       success: true,
       user: {
         id: '1',
-        name: 'Mavene',
+        name: 'JohnDoe',
         email,
         username: email,
         role: 'admin' as User['role'],
