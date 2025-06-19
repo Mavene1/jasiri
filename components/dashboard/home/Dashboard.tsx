@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Users,
     Truck,
@@ -10,7 +10,8 @@ import {
     TrendingDown,
     Plus,
     Trash2,
-    MoreHorizontal
+    MoreHorizontal,
+    PieChart
 } from 'lucide-react';
 import {
     BarChart,
@@ -21,6 +22,7 @@ import {
     ResponsiveContainer,
     Legend
 } from 'recharts';
+import { ActivityData } from '../activities/ActivitiesList';
 
 interface MetricCardProps {
     title: string;
@@ -93,51 +95,112 @@ const Dashboard: React.FC = () => {
 
     const getStatusColor = (status: string) => {
         switch (status) {
-            case 'Active':
-                return 'bg-green-100 text-green-800';
-            case 'Paused':
+            case 'PENDING':
                 return 'bg-yellow-100 text-yellow-800';
-            case 'Canceled':
+            case 'APPROVED':
+                return 'bg-blue-100 text-blue-800';
+            case 'ONGOING':
+                return 'bg-green-100 text-green-800';
+            case 'COMPLETED':
+                return 'bg-emerald-300 text-emerald-800';
+            case 'CANCELLED':
                 return 'bg-red-100 text-red-800';
             default:
                 return 'bg-gray-100 text-gray-800';
         }
     };
 
+    const [activities, setActivities] = useState<ActivityData[]>([
+            {
+                activityId: "395a2fbe-8576-45c0-b832-a1d9bbe7b75d",
+                title: "Youth Counter Extremism Workshop",
+                description: "Empowering youth to counter violent extremism through education and community engagement.",
+                pillar: "AWARENESS",
+                county: "Nairobi",
+                createdBy: "ckipchumba",
+                csoId: "123A",
+                status: "PENDING",
+                scheduledDate: "2025-07-15T10:00:00",
+                location: "Eastleigh Youth Centre",
+                createdAt: "2025-06-11T18:11:24.401964"
+            },
+            {
+                activityId: "b4d7c8e9-1234-4567-8901-f2e3d4c5b6a7",
+                title: "Community Peace Building",
+                description: "Building sustainable peace through community engagement and dialogue.",
+                pillar: "PREVENTION",
+                county: "Mombasa",
+                createdBy: "jdoe",
+                csoId: "456B",
+                status: "APPROVED",
+                scheduledDate: "2025-08-20T14:00:00",
+                location: "Mombasa Community Hall",
+                createdAt: "2025-06-10T12:30:15.123456"
+            },
+            {
+                activityId: "c5e8f9a0-2345-5678-9012-a3b4c5d6e7f8",
+                title: "Women Protection Training",
+                description: "Training program for women's safety and protection in the community.",
+                pillar: "PROTECTION",
+                county: "Kisumu",
+                createdBy: "mwangi",
+                csoId: "789C",
+                status: "ONGOING",
+                scheduledDate: "2025-06-25T09:00:00",
+                location: "Kisumu Women's Center",
+                createdAt: "2025-06-05T08:45:30.987654"
+            },
+            {
+                activityId: "d6f9a0b1-3456-6789-0123-b4c5d6e7f8a9",
+                title: "Emergency Response Drill",
+                description: "Community emergency response and preparedness training program.",
+                pillar: "RESPONSE",
+                county: "Nakuru",
+                createdBy: "akamau",
+                csoId: "012D",
+                status: "COMPLETED",
+                scheduledDate: "2025-05-30T11:00:00",
+                location: "Nakuru Sports Ground",
+                createdAt: "2025-05-15T16:20:45.654321"
+            }
+        ]);
+    
+
     return (
         <div className="p-2 bg-gray-50 min-h-screen">
             {/* Metrics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <MetricCard
-                    title="Total Customers"
+                    title="Total Activities"
                     value="212"
                     change="+9.5%"
                     changeType="positive"
-                    icon={<Users className="w-6 h-6 text-white" />}
+                    icon={<Receipt className="w-6 h-6 text-white" />}
                     iconBg="bg-orange-500"
                 />
                 <MetricCard
-                    title="Total Vendors"
+                    title="Total Reports"
                     value="82"
                     change="-5.5%"
                     changeType="negative"
-                    icon={<Truck className="w-6 h-6 text-white" />}
+                    icon={<FileText className="w-6 h-6 text-white" />}
                     iconBg="bg-blue-500"
                 />
                 <MetricCard
-                    title="Total Invoices"
-                    value="132"
-                    change="+8.5%"
+                    title="Total Pillars"
+                    value="5"
+                    change="+20%"
                     changeType="positive"
-                    icon={<FileText className="w-6 h-6 text-white" />}
+                    icon={<PieChart className="w-6 h-6 text-white" />}
                     iconBg="bg-red-500"
                 />
                 <MetricCard
-                    title="Total Bills"
+                    title="Total Users"
                     value="164"
                     change="-8.5%"
                     changeType="negative"
-                    icon={<Receipt className="w-6 h-6 text-white" />}
+                    // icon={<Receipt className="w-6 h-6 text-white" />}
+                    icon={<Users className="w-6 h-6 text-white" />}
                     iconBg="bg-green-500"
                 />
             </div>
@@ -147,7 +210,7 @@ const Dashboard: React.FC = () => {
                 <div className="lg:col-span-2">
                     <div className="bg-white rounded-lg p-6 shadow-sm">
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-lg font-semibold text-gray-900">Cashflow</h3>
+                            <h3 className="text-lg font-semibold text-gray-900">Activities</h3>
                             <div className="flex items-center space-x-2">
                                 <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">1D</button>
                                 <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded">7D</button>
@@ -202,12 +265,12 @@ const Dashboard: React.FC = () => {
                             <div className="flex items-center">
                                 <div className="w-3 h-3 bg-purple-600 rounded mr-2"></div>
                                 <span className="text-gray-600">Income</span>
-                                <span className="font-semibold ml-1">$1256</span>
+                                <span className="font-semibold ml-1 text-gray-800">$1256</span>
                             </div>
                             <div className="flex items-center">
                                 <div className="w-3 h-3 bg-green-600 rounded mr-2"></div>
                                 <span className="text-gray-600">Expense</span>
-                                <span className="font-semibold ml-1">$235</span>
+                                <span className="font-semibold ml-1 text-gray-800">$235</span>
                             </div>
                         </div>
 
@@ -219,19 +282,19 @@ const Dashboard: React.FC = () => {
 
                 {/* Income vs Expense */}
                 <div className="bg-white rounded-lg p-6 shadow-sm">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-6">Income Vs Expense</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-6">Activities Vs Reports</h3>
 
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <Users className="w-5 h-5 text-gray-400 mr-3" />
                                 <div>
-                                    <p className="text-sm text-gray-600">Total Customers</p>
+                                    <p className="text-sm text-gray-600">Total Activities</p>
                                     <p className="font-semibold">RM0.00</p>
                                 </div>
                             </div>
                             <div className="text-right">
-                                <p className="text-sm text-gray-600">Expense Today</p>
+                                <p className="text-sm text-gray-600">Reports Today</p>
                                 <p className="font-semibold">RM23.00</p>
                             </div>
                         </div>
@@ -240,12 +303,12 @@ const Dashboard: React.FC = () => {
                             <div className="flex items-center">
                                 <TrendingUp className="w-5 h-5 text-gray-400 mr-3" />
                                 <div>
-                                    <p className="text-sm text-gray-600">Income This Mo...</p>
+                                    <p className="text-sm text-gray-600">Activities This Mo...</p>
                                     <p className="font-semibold">RM247.00</p>
                                 </div>
                             </div>
                             <div className="text-right">
-                                <p className="text-sm text-gray-600">Expense This...</p>
+                                <p className="text-sm text-gray-600">Reports This...</p>
                                 <p className="font-semibold">RM254.00</p>
                             </div>
                         </div>
@@ -254,12 +317,12 @@ const Dashboard: React.FC = () => {
                             <div className="flex items-center">
                                 <Users className="w-5 h-5 text-gray-400 mr-3" />
                                 <div>
-                                    <p className="text-sm text-gray-600">Total Customer's</p>
+                                    <p className="text-sm text-gray-600">Total Users</p>
                                     <p className="font-semibold">RM365.00</p>
                                 </div>
                             </div>
                             <div className="text-right">
-                                <p className="text-sm text-gray-600">Income This Mo...</p>
+                                <p className="text-sm text-gray-600">Engagements This Mo...</p>
                                 <p className="font-semibold">RM458.00</p>
                             </div>
                         </div>
@@ -283,12 +346,12 @@ const Dashboard: React.FC = () => {
 
                             <div className="absolute inset-0 flex items-center justify-center flex-col">
                                 <p className="text-2xl font-bold text-gray-900">9.1k</p>
-                                <p className="text-sm text-gray-600">Application</p>
+                                <p className="text-sm text-gray-600">Activities</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="space-y-2 text-sm">
+                    <div className="space-y-2 text-sm text-gray-600">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <div className="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
@@ -323,7 +386,7 @@ const Dashboard: React.FC = () => {
                 {/* Account Balance */}
                 <div className="lg:col-span-2 bg-white rounded-lg p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-lg font-semibold text-gray-900">Account Balance</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">Recent Activities</h3>
                         <button className="text-sm text-purple-600 hover:text-purple-700">See All</button>
                     </div>
 
@@ -332,20 +395,22 @@ const Dashboard: React.FC = () => {
                             <thead>
                                 <tr className="border-b border-gray-200">
                                     <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">No</th>
-                                    <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Bank</th>
-                                    <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Holder Name</th>
-                                    <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Balance</th>
+                                    <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Pillar</th>
+                                    <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">County</th>
+                                    <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">CSO ID</th>
+                                    <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Date</th>
                                     <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Status</th>
                                     <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {accountBalances.map((account) => (
-                                    <tr key={account.id} className="border-b border-gray-100 hover:bg-gray-50">
-                                        <td className="py-4 px-2 text-sm text-gray-900">{account.id}</td>
-                                        <td className="py-4 px-2 text-sm text-gray-900">{account.bank}</td>
-                                        <td className="py-4 px-2 text-sm text-gray-900">{account.holderName}</td>
-                                        <td className="py-4 px-2 text-sm font-medium text-gray-900">{account.balance}</td>
+                                {activities.map((account) => (
+                                    <tr key={account.activityId} className="border-b border-gray-100 hover:bg-gray-50">
+                                        <td className="py-4 px-2 text-sm text-gray-900">{'-'}</td>
+                                        <td className="py-4 px-2 text-sm text-gray-900">{account.pillar}</td>
+                                        <td className="py-4 px-2 text-sm text-gray-900">{account.county}</td>
+                                        <td className="py-4 px-2 text-sm font-medium text-gray-900">{account.csoId}</td>
+                                        <td className="py-4 px-2 text-sm font-medium text-gray-900">{account.scheduledDate}</td>
                                         <td className="py-4 px-2">
                                             <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(account.status)}`}>
                                                 {account.status}
@@ -367,6 +432,7 @@ const Dashboard: React.FC = () => {
                         </table>
                     </div>
                 </div>
+                
             </div>
         </div>
     );
