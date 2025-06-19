@@ -18,7 +18,7 @@ const UnderDevelopment = ({ title, expectedDate = "Q2 2024" }: UnderDevelopmentP
         transition={{ duration: 0.5 }}
         className="min-h-full w-full"
       >
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="bg-white rounded-sm shadow-sm overflow-hidden">
           {/* Header Banner */}
           <div className="bg-gradient-to-r from-[#87c873] to-[#68bf54] p-6 text-white text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-white/5 transform -skew-y-6"></div>
