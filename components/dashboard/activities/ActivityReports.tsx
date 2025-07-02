@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation'
 import { ActivityData, ActivityReport } from './ActivitiesList';
+import { ReportingModal } from './ReportingModal';
 
 interface ActivityDetailsProps {
     activityId: string
@@ -147,7 +148,7 @@ export default function ActivityDetails({ activityId }: ActivityDetailsProps) {
     };
 
     return (
-        <div className="p-6 bg-gray-50 min-h-screen">
+        <div className="p-6 bg-gray-50 min-h-screen text-gray-600">
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
                     <button
@@ -166,7 +167,7 @@ export default function ActivityDetails({ activityId }: ActivityDetailsProps) {
                     onClick={() => setIsUploadModalOpen(true)}
                     className="bg-purple-600 cursor-pointer hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
                     <Upload className="w-4 h-4" />
-                    <span>Upload Report</span>
+                    <span>Complete the Activity and Report</span>
                 </button>
             </div>
 
@@ -230,7 +231,7 @@ export default function ActivityDetails({ activityId }: ActivityDetailsProps) {
                 </div>
             )}
 
-            {isUploadModalOpen && (
+            {/* {isUploadModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
                         <div className="flex items-center justify-between mb-4">
@@ -307,7 +308,9 @@ export default function ActivityDetails({ activityId }: ActivityDetailsProps) {
                         </form>
                     </div>
                 </div>
-            )}
+            )} */}
+            {isUploadModalOpen && <ReportingModal activity={activity} onClose={() => setIsUploadModalOpen(false)} onSubmit={() => setIsUploadModalOpen(false)} />}
+
 
         </div>
 
