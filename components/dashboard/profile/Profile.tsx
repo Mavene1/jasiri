@@ -67,7 +67,7 @@ const Profile = () => {
     ];
 
     const handleRoleChange = (newRole: UserRole) => {
-        setUser({ ...user, role: newRole});
+        setUser({ ...user, role: newRole });
         // Reset profile completion when role changes for demo purposes
         setUser(prev => ({ ...prev, role: newRole, profileComplete: 25 }));
         setShowBadge(true); // Show badge again when role changes
@@ -148,128 +148,126 @@ const Profile = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-800">
-            <div className="container mx-auto p-6">
-                {/* Header */}
-                <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
-                    <div className="flex flex-col md:flex-row items-center justify-between">
-                        <div className="flex items-center space-x-6 mb-6 md:mb-0">
-                            <div className="relative">
-                                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                                    {user.name.charAt(0)}
-                                </div>
-                                <div className="absolute -bottom-2 -right-2 bg-white rounded-full p-1 shadow-lg">
-                                    {getRoleIcon(user.role)}
-                                </div>
-                            </div>
-                            <div>
-                                <h1 className="text-3xl font-bold text-gray-800">{user.name}</h1>
-                                <p className="text-gray-600">{user.email}</p>
-                                <p className="text-sm font-medium text-blue-600">{getRoleDisplayName(user.role)}</p>
-                            </div>
-                        </div>
-
+        <div className="p-4 bg-gray-50 min-h-screen text-gray-500">
+            {/* Header */}
+            <div className="bg-white rounded-sm shadow-sm p-4 mb-4">
+                <div className="flex flex-col md:flex-row items-center justify-between">
+                    <div className="flex items-center space-x-6 mb-6 md:mb-0">
                         <div className="relative">
-                            <select
-                                value={user.role}
-                                onChange={(e) => handleRoleChange(e.target.value as UserRole)}
-                                className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            >
-                                {roleOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
-                            <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                                {user.name.charAt(0)}
+                            </div>
+                            <div className="absolute -bottom-2 -right-2 bg-white rounded-full p-1 shadow-lg">
+                                {getRoleIcon(user.role)}
+                            </div>
                         </div>
+                        <div>
+                            <h1 className="text-3xl font-bold text-gray-800">{user.name}</h1>
+                            <p className="text-gray-600">{user.email}</p>
+                            <p className="text-sm font-medium text-blue-600">{getRoleDisplayName(user.role)}</p>
+                        </div>
+                    </div>
 
-                        {/* Profile Completion */}
-                        <div className="text-center">
-                            <div className="relative w-24 h-24 mb-3 ml-18">
-                                <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
-                                    <path
-                                        className="text-gray-200"
-                                        stroke="currentColor"
-                                        strokeWidth="3"
-                                        fill="transparent"
-                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                    />
-                                    <path
-                                        className={getProgressColor(user.profileComplete)}
-                                        stroke="currentColor"
-                                        strokeWidth="3"
-                                        strokeLinecap="round"
-                                        fill="transparent"
-                                        strokeDasharray={`${user.profileComplete}, 100`}
-                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                    />
-                                </svg>
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-xl font-bold text-gray-700">{user.profileComplete}%</span>
+                    <div className="relative">
+                        <select
+                            value={user.role}
+                            onChange={(e) => handleRoleChange(e.target.value as UserRole)}
+                            className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                            {roleOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
+                        <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                    </div>
+
+                    {/* Profile Completion */}
+                    <div className="text-center">
+                        <div className="relative w-24 h-24 mb-3 ml-18">
+                            <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
+                                <path
+                                    className="text-gray-200"
+                                    stroke="currentColor"
+                                    strokeWidth="3"
+                                    fill="transparent"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <path
+                                    className={getProgressColor(user.profileComplete)}
+                                    stroke="currentColor"
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                    fill="transparent"
+                                    strokeDasharray={`${user.profileComplete}, 100`}
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                            </svg>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-xl font-bold text-gray-700">{user.profileComplete}%</span>
+                            </div>
+                        </div>
+                        <p className="text-sm text-gray-600">Profile Complete</p>
+
+                        {/* Update Profile Badge */}
+                        {showBadge && user.profileComplete < 100 && (
+                            <div className="mt-3 relative">
+                                <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg animate-pulse">
+                                    <Star className="w-4 h-4" />
+                                    <span>Complete your profile!</span>
+                                    <button
+                                        onClick={() => setShowBadge(false)}
+                                        className="ml-2 hover:bg-white hover:bg-opacity-20 rounded-full p-1"
+                                    >
+                                        <X className="w-3 h-3" />
+                                    </button>
                                 </div>
                             </div>
-                            <p className="text-sm text-gray-600">Profile Complete</p>
-
-                            {/* Update Profile Badge */}
-                            {showBadge && user.profileComplete < 100 && (
-                                <div className="mt-3 relative">
-                                    <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg animate-pulse">
-                                        <Star className="w-4 h-4" />
-                                        <span>Complete your profile!</span>
-                                        <button
-                                            onClick={() => setShowBadge(false)}
-                                            className="ml-2 hover:bg-white hover:bg-opacity-20 rounded-full p-1"
-                                        >
-                                            <X className="w-3 h-3" />
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
+                        )}
                     </div>
                 </div>
+            </div>
 
-                {/* Role-specific Profile Form */}
-                <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-                    <div className="p-8">
-                        {renderRoleSpecificProfile()}
+            {/* Role-specific Profile Form */}
+            <div className="bg-white rounded-sm shadow-sm overflow-hidden">
+                <div className="p-4">
+                    {renderRoleSpecificProfile()}
 
-                        {/* Save Button */}
-                        <div className="mt-8 flex justify-end space-x-4">
-                            <button className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-                                Cancel
-                            </button>
-                            <button
-                                onClick={() => handleProfileUpdate({})}
-                                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
-                            >
-                                Save Profile
-                            </button>
-                        </div>
+                    {/* Save Button */}
+                    <div className="mt-8 flex justify-end space-x-4">
+                        <button className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button
+                            onClick={() => handleProfileUpdate({})}
+                            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
+                        >
+                            Save Profile
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                {/* Tips Section */}
-                <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">💡 Profile Tips</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
-                        <div className="flex items-start space-x-2">
-                            <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>Complete your profile to unlock all features</span>
-                        </div>
-                        <div className="flex items-start space-x-2">
-                            <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>Add a professional photo to build trust</span>
-                        </div>
-                        <div className="flex items-start space-x-2">
-                            <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>Connect with other users in your network</span>
-                        </div>
-                        <div className="flex items-start space-x-2">
-                            <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>Keep your information up to date</span>
-                        </div>
+            {/* Tips Section */}
+            <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-sm p-4">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">💡 Profile Tips</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
+                    <div className="flex items-start space-x-2">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>Complete your profile to unlock all features</span>
+                    </div>
+                    <div className="flex items-start space-x-2">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>Add a professional photo to build trust</span>
+                    </div>
+                    <div className="flex items-start space-x-2">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>Connect with other users in your network</span>
+                    </div>
+                    <div className="flex items-start space-x-2">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>Keep your information up to date</span>
                     </div>
                 </div>
             </div>

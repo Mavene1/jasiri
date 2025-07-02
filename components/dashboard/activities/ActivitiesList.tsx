@@ -178,7 +178,7 @@ export default function ActivitiesList() {
                 ),
             }),
             columnHelper.accessor('pillar', {
-                header: 'Pillar',
+                header: 'Priority Area',
                 cell: info => {
                     const pillar = info.getValue();
                     const getPillarColor = (pillar: string) => {
@@ -212,7 +212,7 @@ export default function ActivitiesList() {
                 ),
             }),
             columnHelper.accessor('csoId', {
-                header: 'CSO ID',
+                header: 'Organization ID',
                 cell: info => (
                     <span className="font-mono text-sm text-gray-600">
                         {info.getValue()}
@@ -361,14 +361,13 @@ export default function ActivitiesList() {
     ];
 
     return (
-        <div className="p-6 bg-gray-50 min-h-screen text-gray-500">
+        <div className="p-4 bg-gray-50 min-h-screen text-gray-500">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Activities</h1>
                     <p className="text-gray-600">Manage and track all activities</p>
                 </div>
-                {/* <PVCEActivityModal/> */}
                 <button
                     onClick={() => setIsModalOpen(true)}
                     className="bg-purple-600 cursor-pointer hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
@@ -528,13 +527,13 @@ export default function ActivitiesList() {
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
                                         <Building className="w-4 h-4 inline mr-2" />
-                                        Pillar *
+                                        Priority Area *
                                     </label>
                                     <select
                                         {...register('pillar', { required: 'Pillar is required' })}
                                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
                                     >
-                                        <option value="">Select Pillar</option>
+                                        <option value="">Select Priority Area</option>
                                         <option value="AWARENESS">Awareness</option>
                                         <option value="PREVENTION">Prevention</option>
                                         <option value="PROTECTION">Protection</option>

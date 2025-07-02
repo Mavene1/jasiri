@@ -164,7 +164,7 @@ const Dashboard: React.FC = () => {
     
 
     return (
-        <div className="p-2 bg-gray-50 min-h-screen">
+        <div className="p-4 bg-gray-50 min-h-screen">
             {/* Metrics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <MetricCard
@@ -184,7 +184,7 @@ const Dashboard: React.FC = () => {
                     iconBg="bg-blue-500"
                 />
                 <MetricCard
-                    title="Total Pillars"
+                    title="Total Priority Areas"
                     value="5"
                     change="+20%"
                     changeType="positive"
@@ -261,12 +261,12 @@ const Dashboard: React.FC = () => {
                         <div className="flex items-center justify-center space-x-6 text-sm">
                             <div className="flex items-center">
                                 <div className="w-3 h-3 bg-purple-600 rounded mr-2"></div>
-                                <span className="text-gray-600">Income</span>
+                                <span className="text-gray-600">Awareness</span>
                                 <span className="font-semibold ml-1 text-gray-800">$1256</span>
                             </div>
                             <div className="flex items-center">
                                 <div className="w-3 h-3 bg-green-600 rounded mr-2"></div>
-                                <span className="text-gray-600">Expense</span>
+                                <span className="text-gray-600">Prevention</span>
                                 <span className="font-semibold ml-1 text-gray-800">$235</span>
                             </div>
                         </div>
