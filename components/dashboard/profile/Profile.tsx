@@ -6,6 +6,7 @@ import IndividualProfile from './IndividualProfile';
 import CEFProfile from './CEFProfile';
 import NCTCProfile from './NCTCProfile';
 import OrganizationProfile from './OrganiationProfile';
+import { useAppStore } from '@/lib/store/useAppStore';
 
 // Types
 export type UserRole = 'individual' | 'cef' | 'organization' | 'nctc';
@@ -47,6 +48,7 @@ export const registeredUsers = [
 
 // Main Profile Component
 const Profile = () => {
+    // const {user, setUser} = useAppStore((state) => state);
     const [user, setUser] = useState<BaseUser>({
         id: '1',
         name: 'John Doe',
@@ -65,7 +67,7 @@ const Profile = () => {
     ];
 
     const handleRoleChange = (newRole: UserRole) => {
-        setUser({ ...user, role: newRole });
+        setUser({ ...user, role: newRole});
         // Reset profile completion when role changes for demo purposes
         setUser(prev => ({ ...prev, role: newRole, profileComplete: 25 }));
         setShowBadge(true); // Show badge again when role changes
@@ -147,7 +149,7 @@ const Profile = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-800">
-            <div className="container mx-auto px-4 py-8">
+            <div className="container p-6">
                 {/* Header */}
                 <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
                     <div className="flex flex-col md:flex-row items-center justify-between">

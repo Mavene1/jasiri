@@ -4,11 +4,12 @@ export interface User {
     username:string;
     email: string;
     avatar?: string;
-    role: 'admin' | 'user' | 'volunteer';
+    role: 'individual' | 'cef' | 'organization' | 'nctc';
     firstName?: string;
     lastName?: string;
     mobile?: string;
     county?: string;
+    profileComplete?: number;
     createdAt: Date;
     updatedAt: Date;
   }
