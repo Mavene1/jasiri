@@ -46,7 +46,7 @@ const AboutSection = () => {
           <div className="relative">
             <div className="relative w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/2.png"
+                src="/images/kenya3.png"
                 alt="Community members engaged in peace-building dialogue and activities"
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-105"

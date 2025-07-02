@@ -64,7 +64,7 @@ const HeroSection = () => {
               {/* Main image */}
               <div className="relative w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden">
                 <Image
-                  src="/images/1.png"
+                  src="/images/kenya10.png"
                   alt="Community members engaging in peace-building activities"
                   fill
                   className="object-cover"
@@ -74,7 +74,7 @@ const HeroSection = () => {
               {/* Floating child image */}
               <div className="absolute -top-8 -left-8 w-32 h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-white shadow-lg">
                 <Image
-                  src="/images/2.png"
+                  src="/images/kenya1.png"
                   alt="Community member"
                   fill
                   className="object-cover"

@@ -38,10 +38,10 @@ const Header = () => {
               About Us
             </Link>
             <Link
-              href="/pillars"
-              className={`${isActive('/pillars') ? 'text-green-600' : 'text-gray-600'} hover:text-gray-900 transition-colors`}
+              href="/priority-areas"
+              className={`${isActive('/priority-areas') ? 'text-green-600' : 'text-gray-600'} hover:text-gray-900 transition-colors`}
             >
-              Our Pillars
+              Priority Areas
             </Link>
             <Link
               href="/activities"

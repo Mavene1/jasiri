@@ -1,7 +1,7 @@
 import { BookOpen, Users, FileText, BarChart3, Eye, Search } from 'lucide-react';
 import Link from 'next/link';
 
-const Pillars = () => {
+const PriorityAreas = () => {
   const pillars = [
     {
       id: 1,
@@ -54,7 +54,7 @@ const Pillars = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="text-orange-400 text-md font-semibold uppercase tracking-wider mb-4 block">
-            Our Pillars
+            Our Priority Areas
           </span>
           <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6">
             Your Support Strengthens Peace And
@@ -106,10 +106,10 @@ const Pillars = () => {
 
         {/* View All Button */}
         <Link
-          href="/pillars">
+          href="/priority-areas">
           <div className="text-center">
             <button className="bg-green-600 cursor-pointer text-white px-8 py-4 rounded-full font-medium hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center mx-auto">
-              View All Programs
+              View All Priority Areas
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -121,4 +121,4 @@ const Pillars = () => {
   );
 };
 
-export default Pillars;
+export default PriorityAreas;

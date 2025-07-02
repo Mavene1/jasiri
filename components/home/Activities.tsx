@@ -9,7 +9,7 @@ const Activities = () => {
       category: "Community Engagement",
       title: "Safe Spaces, Strong Voices",
       description: "Creating secure environments for open dialogue and community engagement to counter extremist narratives.",
-      image: "/images/1.png",
+      image: "/images/kenya1.png",
       progress: 78,
       goal: "Build 50 community dialogue centers",
       buttonText: "Support Now!"
@@ -19,7 +19,7 @@ const Activities = () => {
       category: "Youth Empowerment", 
       title: "Empowering Tomorrow, One Youth At A Time",
       description: "Providing alternative pathways and opportunities for at-risk youth through mentorship and skills development.",
-      image: "/images/2.png",
+      image: "/images/kenya10.png",
       progress: 65,
       goal: "Reach 1000 young people",
       buttonText: "Support Now!"
@@ -29,7 +29,7 @@ const Activities = () => {
       category: "Peace Building",
       title: "Healing Communities, Spreading Hope",
       description: "Supporting communities affected by violent extremism through trauma healing and reconciliation programs.",
-      image: "/images/3.png",
+      image: "/images/kenya3.png",
       progress: 82,
       goal: "Support 25 communities",
       buttonText: "Support Now!"
