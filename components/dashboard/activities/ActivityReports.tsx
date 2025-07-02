@@ -113,10 +113,37 @@ export default function ActivityDetails({ activityId }: ActivityDetailsProps) {
         },
         {
             reportId: "report-004",
-            activityId: "b4d7c8e9-1234-4567-8901-f2e3d4c5b6a7",
+            activityId: "d6f9a0b1-3456-6789-0123-b4c5d6e7f8a9",
             filePath: "/uploads/reports/peace-building-assessment.pdf",
             fileName: "Community Assessment Report.pdf",
             mimeType: "application/pdf",
+            description: "Pre-activity community assessment and needs analysis",
+            uploadedAt: "2025-06-12T11:20:00"
+        },
+        {
+            reportId: "report-006",
+            activityId: "d6f9a0b1-3456-6789-0123-b4c5d6e7f8a9",
+            filePath: "/uploads/reports/peace-building-assessment.pdf",
+            fileName: "Participant Feedback Summary.pdf",
+            mimeType: "application/pdf",
+            description: "Pre-activity community assessment and needs analysis",
+            uploadedAt: "2025-06-12T11:20:00"
+        },
+        {
+            reportId: "report-007",
+            activityId: "d6f9a0b1-3456-6789-0123-b4c5d6e7f8a9",
+            filePath: "/uploads/reports/peace-building-assessment.pdf",
+            fileName: "Workshop Photos.zip",
+            mimeType: "application/zip",
+            description: "Pre-activity community assessment and needs analysis",
+            uploadedAt: "2025-06-12T11:20:00"
+        },
+        {
+            reportId: "report-008",
+            activityId: "d6f9a0b1-3456-6789-0123-b4c5d6e7f8a9",
+            filePath: "/uploads/reports/peace-building-assessment.pdf",
+            fileName: "Excel Quantitative Report.xlsx",
+            mimeType: "application/zip",
             description: "Pre-activity community assessment and needs analysis",
             uploadedAt: "2025-06-12T11:20:00"
         },
