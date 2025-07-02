@@ -166,7 +166,6 @@ export default function ActivitiesList() {
 
     const columnHelper = createColumnHelper<ActivityData>();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columns = useMemo<ColumnDef<ActivityData, any>[]>(
         () => [
             columnHelper.accessor('title', {

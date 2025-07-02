@@ -166,7 +166,7 @@ const Dashboard: React.FC = () => {
     return (
         <div className="p-4 bg-gray-50 min-h-screen">
             {/* Metrics Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                 <MetricCard
                     title="Total Activities"
                     value="212"
@@ -202,7 +202,7 @@ const Dashboard: React.FC = () => {
                 />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
                 {/* Cashflow Chart */}
                 <div className="lg:col-span-2">
                     <div className="bg-white rounded-lg p-6 shadow-sm">
@@ -327,7 +327,7 @@ const Dashboard: React.FC = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 {/* Project Status */}
                 <div className="bg-white rounded-lg p-6 shadow-sm">
                     <h3 className="text-lg font-semibold text-gray-900 mb-6">Project Status</h3>

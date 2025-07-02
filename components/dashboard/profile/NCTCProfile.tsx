@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Camera, Plus, Check, Shield} from 'lucide-react';
 import { BaseUser, registeredUsers } from './Profile';
+import Image from 'next/image';
 
 const nctcDepartments = {
     'ICT/Stratcom': ['ICT', 'Media'],
@@ -111,10 +112,12 @@ const NCTCProfile = ({ user, onUpdate }: { user: BaseUser; onUpdate: (data: any)
                     <div className="flex items-center space-x-4">
                         <div className="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
                             {formData.profilePhoto ? (
-                                <img
+                                <Image
                                     src={URL.createObjectURL(formData.profilePhoto)}
                                     alt="Profile"
                                     className="w-full h-full object-cover rounded-lg"
+                                    width={100}
+                                    height={100}
                                 />
                             ) : (
                                 <Camera className="w-8 h-8 text-gray-400" />

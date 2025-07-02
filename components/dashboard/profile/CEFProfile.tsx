@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Plus, X, Check, Building } from 'lucide-react';
 import { BaseUser, ContactPerson, registeredUsers } from './Profile';
+import Image from 'next/image';
 
 const cefSecretariats = [
     'Nairobi CEF Secretariat', 'Mombasa CEF Secretariat', 'Nakuru CEF Secretariat',
@@ -129,7 +130,7 @@ const CEFProfile = ({ user, onUpdate }: { user: BaseUser; onUpdate: (data: any) 
                     <div className="flex items-center space-x-4">
                         <div className="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
                             {formData.logo ? (
-                                <img
+                                <Image
                                     src={URL.createObjectURL(formData.logo)}
                                     alt="Logo"
                                     className="w-full h-full object-contain rounded-lg"

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Building, Users } from 'lucide-react';
 import { Address, BaseUser, ContactPerson } from './Profile';
+import Image from 'next/image';
 
 const organizations = [
     'Kenya Red Cross', 'Amnesty International Kenya', 'Kenya Human Rights Commission',
@@ -185,10 +186,12 @@ const OrganizationProfile = ({ user, onUpdate }: { user: BaseUser; onUpdate: (da
                             <div className="flex items-center space-x-4">
                                 <div className="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
                                     {orgData.logo ? (
-                                        <img
+                                        <Image
                                             src={URL.createObjectURL(orgData.logo)}
                                             alt="Logo"
                                             className="w-full h-full object-contain rounded-lg"
+                                            width={100}
+                                            height={100}
                                         />
                                     ) : (
                                         <Building className="w-8 h-8 text-gray-400" />
