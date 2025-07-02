@@ -30,6 +30,7 @@ export default function ReportDetails({ activityId, reportId }: ReportDetailsPro
             csoId: "123A",
             status: "PENDING",
             scheduledDate: "2025-07-15T10:00:00",
+            targetOutreach: 100,
             location: "Eastleigh Youth Centre",
             createdAt: "2025-06-11T18:11:24.401964"
         },
@@ -43,6 +44,7 @@ export default function ReportDetails({ activityId, reportId }: ReportDetailsPro
             csoId: "456B",
             status: "APPROVED",
             scheduledDate: "2025-08-20T14:00:00",
+            targetOutreach: 45,
             location: "Mombasa Community Hall",
             createdAt: "2025-06-10T12:30:15.123456"
         },
@@ -56,6 +58,7 @@ export default function ReportDetails({ activityId, reportId }: ReportDetailsPro
             csoId: "789C",
             status: "ONGOING",
             scheduledDate: "2025-06-25T09:00:00",
+            targetOutreach: 70,
             location: "Kisumu Women's Center",
             createdAt: "2025-06-05T08:45:30.987654"
         },
@@ -69,6 +72,7 @@ export default function ReportDetails({ activityId, reportId }: ReportDetailsPro
             csoId: "012D",
             status: "COMPLETED",
             scheduledDate: "2025-05-30T11:00:00",
+            targetOutreach: 25,
             location: "Nakuru Sports Ground",
             createdAt: "2025-05-15T16:20:45.654321"
         }

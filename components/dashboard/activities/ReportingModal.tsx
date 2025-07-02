@@ -283,7 +283,7 @@ export const ReportingModal: React.FC<ReportingModalProps> = ({ activity, onClos
                 onChange={handleFileChange}
                 multiple
                 accept="image/*,application/pdf,.doc,.docx"
-                className="w-full"
+                className="w-full bg-gray-50 cursor-pointer p-1 rounded-md"
               />
               <p className="text-sm text-gray-500 mt-2">
                 Supported formats: Images, PDF, Word documents

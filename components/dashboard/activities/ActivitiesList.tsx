@@ -344,6 +344,7 @@ export default function ActivitiesList() {
                     ...data,
                     createdBy: "current_user",
                     status: "PENDING",
+                    targetOutreach: 50,
                     createdAt: new Date().toISOString()
                 };
                 setActivities([newActivity, ...activities]);
