@@ -5,6 +5,10 @@ export interface User {
     email: string;
     avatar?: string;
     role: 'admin' | 'user' | 'volunteer';
+    firstName?: string;
+    lastName?: string;
+    mobile?: string;
+    county?: string;
     createdAt: Date;
     updatedAt: Date;
   }

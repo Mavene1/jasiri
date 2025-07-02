@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useAppStore } from '@/lib/store/useAppStore';
 import { useRouter } from 'next/navigation';
 import { loginAction } from '@/lib/actions/auth';
+import toast from 'react-hot-toast';
 
 interface LoginFormData {
     email: string;
@@ -37,20 +38,22 @@ const Login: React.FC = () => {
             const result = await loginAction(data);
             if (result.success) {
                 setUser(result.user);
-                router.push('/dashboard');
+                toast.success('Sign in successful');
+                router.push('/dashboard/profile');
             } else {
-                setErrorMsg(result.message);
+                toast.error(result.message);
+                setErrorMsg('');
             }
         });
         console.log('Login attempt:', data);
     };
 
-    const handleRegisterRedirect = () => {
-        window.open('https://secure-portal.jasiri.org/register', '_blank');
-    };
-
     const handleBackToSite = () => {
         window.location.href = '/';
+    };
+
+    const handleRegisterRedirect = () => {
+        router.push('/signup');
     };
 
     return (
@@ -208,16 +211,16 @@ const Login: React.FC = () => {
                             {/* Registration CTA */}
                             <div className="text-center">
                                 <p className="text-gray-600 mb-4">
-                                    Join our mission to build safer communities
+                                    Sign Up to join our mission to build safer communities
                                 </p>
                                 <button
                                     onClick={handleRegisterRedirect}
                                     className="w-full cursor-pointer bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-green-700 hover:to-green-800 transform hover:scale-105 transition-all duration-200 shadow-lg"
                                 >
-                                    Apply for Membership
+                                    Sign Up for Membership
                                 </button>
                                 <p className="text-xs text-gray-500 mt-3">
-                                    Registration requires verification through our secure partner platform
+                                    Sign Up requires verification through our secure partner platform
                                 </p>
                             </div>
 

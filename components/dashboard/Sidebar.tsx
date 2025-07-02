@@ -14,6 +14,7 @@ import {
   PanelLeftOpen,
   PanelLeftClose,
   ExternalLink,
+  User,
 } from "lucide-react";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { logoutAction } from "@/lib/actions/auth";
@@ -36,7 +37,7 @@ const Sidebar = () => {
       const result = await logoutAction();
       if (result.success) {
         logout(); // clear Zustand
-        router.push('/get-involved');
+        router.push('/signin');
       } else {
         setErrorMsg(result.message);
       }
@@ -49,6 +50,7 @@ const Sidebar = () => {
     // { icon: <FileText size={18} />, label: "Systems", href: "/systems" },
     // { icon: <Package size={18} />, label: "Products", href: "/products" },
     { icon: <PieChart size={18} />, label: "Reports", href: "/dashboard/reports" },
+    { icon: <User size={18} />, label: "My-Profile", href: "/dashboard/profile" },
   ];
 
   const isActive = (path: string) => pathname === path;
@@ -92,7 +94,7 @@ const Sidebar = () => {
           <CheckCircle size={18} />
           {!isCollapsed && (
             <>
-              <span className="font-medium">Tasks</span>
+              <span className="font-medium">Forum</span>
               <span className="ml-auto bg-[#2CB34A] text-white px-2 py-0.5 rounded-full text-sm">
                 16
               </span>
@@ -100,23 +102,23 @@ const Sidebar = () => {
           )}
         </div> */}
         <Link
-          key={"/dashboard/tasks"}
-          href="/dashboard/tasks"
+          key={"/dashboard/forum"}
+          href="/dashboard/forum"
           className={`flex items-center gap-2 px-3 py-2 pl-6 text-gray-700 hover:bg-[#E3F2FD] rounded-lg cursor-pointer ${isCollapsed ? "justify-center" : ""
-            }${isActive("/dashboard/tasks")
+            }${isActive("/dashboard/forum")
               ? "bg-[#E3F2FD] text-[#2CB34A]"
               : "text-gray-700 hover:bg-[#E3F2FD]"
             }`}
-          title={isCollapsed ? "Tasks" : ""}
+          title={isCollapsed ? "Forum" : ""}
         >
           <CheckCircle size={18} />
           {!isCollapsed && (
             <>
-              <span>Tasks</span>
+              <span>Forum</span>
               <span className="ml-auto bg-[#2CB34A] text-white px-2 py-0.5 rounded-full text-sm">
                 16
               </span>
-              {isActive("/dashboard/tasks") && (
+              {isActive("/dashboard/forum") && (
                 <div className="ml-auto w-1.5 h-1.5 rounded-full bg-[#2CB34A]" />
               )}
             </>

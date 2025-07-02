@@ -31,6 +31,7 @@ import {
 } from '@tanstack/react-table';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import PVCEActivityModal from './PVCEActivityModal';
 
 export interface ActivityData {
     activityId: string;
@@ -367,6 +368,7 @@ export default function ActivitiesList() {
                     <h1 className="text-2xl font-bold text-gray-900">Activities</h1>
                     <p className="text-gray-600">Manage and track all activities</p>
                 </div>
+                {/* <PVCEActivityModal/> */}
                 <button
                     onClick={() => setIsModalOpen(true)}
                     className="bg-purple-600 cursor-pointer hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
@@ -482,7 +484,7 @@ export default function ActivitiesList() {
             </div>
 
             {/* Create/Edit Activity Modal */}
-            {(isModalOpen || isEditModalOpen) && (
+            {isEditModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white rounded-lg p-6 w-full max-w-3xl mx-4 max-h-[90vh] overflow-y-auto">
                         <div className="flex items-center justify-between mb-6">
@@ -641,7 +643,9 @@ export default function ActivitiesList() {
                                 <button
                                     type="button"
                                     onClick={() => {
-                                        setIsModalOpen(false);
+                                        // setIsModalOpen(false);
+                                        setIsEditModalOpen(false);
+                                        setEditingActivity(null);
                                         reset();
                                     }}
                                     className="px-4 cursor-pointer py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
@@ -663,6 +667,22 @@ export default function ActivitiesList() {
                     </div>
                 </div>
             )}
+
+            {isModalOpen  && (
+                <PVCEActivityModal
+                    setIsModalOpen={setIsModalOpen}
+                    setIsEditModalOpen={setIsEditModalOpen}
+                    setEditingActivity={setEditingActivity}
+                    // onSubmit={onSubmit}
+                    onCancel={() => {
+                        setIsModalOpen(false);
+                        setIsEditModalOpen(false);
+                        setEditingActivity(null);
+                        reset();
+                    }}
+                />
+            )}
+
 
             {/* Delete Confirmation Modal */}
             {isDeleteModalOpen && (

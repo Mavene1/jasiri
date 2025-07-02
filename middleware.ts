@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
   const isProtected = request.nextUrl.pathname.startsWith('/dashboard');
 
   if (isProtected && !token) {
-    return NextResponse.redirect(new URL('/get-involved', request.url));
+    return NextResponse.redirect(new URL('/signin', request.url));
   }
 
   return NextResponse.next();

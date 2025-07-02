@@ -1,10 +1,10 @@
 import React from 'react'
-import UnderDevelopment from '@/components/UnderDevelopment'
+import Forum from '@/components/dashboard/forum/Forum'
 
 const page = () => {
   return (
     <div>
-        <UnderDevelopment title="Tasks" />
+        <Forum />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface VolunteerStats {
   count: number;
@@ -34,7 +35,7 @@ const HeroSection = () => {
                 <br />
                 <span className="text-blue-900">Communities</span>
               </h1>
-              
+
               <p className="text-lg lg:text-xl text-gray-600 max-w-lg">
                 Join us in preventing violent extremism through community engagement, awareness, and collaborative dialogue
               </p>
@@ -42,15 +43,18 @@ const HeroSection = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-green-600 text-white px-8 py-3 rounded-md font-medium hover:bg-green-700 transition-colors">
-                Our Programs
-              </button>
-              <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-md font-medium hover:bg-gray-50 transition-colors flex items-center justify-center">
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-                Play Video
-              </button>
+              <Link
+                href="/signin">
+                <button className="bg-green-600 cursor-pointer text-white px-8 py-3 rounded-md font-medium hover:bg-green-700 transition-colors">
+                  Sign In
+                </button>
+              </Link>
+              <Link
+                href="/signup">
+                <button className="bg-red-600 cursor-pointer text-white px-8 py-3 rounded-md font-medium hover:bg-red-700 transition-colors">
+                  Sign Up
+                </button>
+              </Link>
             </div>
           </div>
 
