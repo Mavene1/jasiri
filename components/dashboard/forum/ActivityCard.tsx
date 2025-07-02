@@ -84,7 +84,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
     };
 
     return (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-300">
+        <div className="bg-white rounded-md shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
             {/* Header */}
             <div className="p-6 pb-4">
                 <div className="flex items-start justify-between mb-3">
@@ -136,7 +136,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
+            <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 mt-auto">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                         <button
