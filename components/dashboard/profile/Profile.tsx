@@ -53,7 +53,7 @@ const Profile = () => {
         id: '1',
         name: 'John Doe',
         email: 'john@example.com',
-        role: 'nctc', // This would come from your auth system
+        role: 'individual', // This would come from your auth system
         profileComplete: 25
     });
 
