@@ -68,9 +68,10 @@ export const dummyVolunteers: User[] = [
     username: 'johndoe',
     email: 'john@example.com',
     avatar: '/api/placeholder/40/40',
-    role: 'volunteer',
+    role: 'individual',
     createdAt: new Date('2024-01-01'),
     updatedAt: new Date('2024-01-01'),
+    profileComplete: 25
   },
   {
     id: '2',
@@ -78,9 +79,10 @@ export const dummyVolunteers: User[] = [
     username: 'janesmith',
     email: 'jane@example.com',
     avatar: '/api/placeholder/40/40',
-    role: 'volunteer',
+    role: 'individual',
     createdAt: new Date('2024-01-02'),
     updatedAt: new Date('2024-01-02'),
+    profileComplete: 25
   },
   // Add more volunteers as needed
 ];
