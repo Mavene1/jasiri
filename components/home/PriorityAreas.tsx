@@ -6,37 +6,37 @@ const PriorityAreas = () => {
     {
       id: 1,
       icon: <Users className="w-8 h-8" />,
-      title: "Awareness and Dialogue",
-      description: "Building community understanding through open conversations and educational programs to prevent radicalization.",
+      title: "Awareness",
+      description: "To delegitimise violent extremist ideologies by increasing awareness, discrediting violent extremist narratives and promoting positive attitudes and behaviours.",
       link: "See All Programs"
     },
     {
       id: 2,
       icon: <BookOpen className="w-8 h-8" />,
-      title: "PCVE Network",
-      description: "Strengthening partnerships and networks to enhance Preventing and Countering Violent Extremism initiatives.",
+      title: "Empowerment",
+      description: "To build cohesive and resilient communities by sustainably addressing vulnerabilities.",
       link: "See All Programs",
       highlighted: true
     },
     {
       id: 3,
       icon: <FileText className="w-8 h-8" />,
-      title: "Policies and Good Practices",
-      description: "Developing evidence-based policies and sharing best practices for sustainable peace-building.",
+      title: "Early Warning and Response",
+      description: "To build capacity for early and coordinated responses by addressing gaps and enhancing cooperation among PCVE stakeholders.",
       link: "See All Programs"
     },
     {
       id: 4,
       icon: <BarChart3 className="w-8 h-8" />,
-      title: "Impact Assessment",
-      description: "Measuring and evaluating the effectiveness of our interventions to ensure meaningful community impact.",
+      title: "Policy and Practice",
+      description: "To generate PCVE policies and actions that are suitable, innovative and evidence-driven through research, harnessing local knowledge, monitoring, evaluation, and learning.",
       link: "See All Programs"
     },
     {
       id: 5,
       icon: <Eye className="w-8 h-8" />,
-      title: "Tracking Vulnerabilities",
-      description: "Identifying and monitoring community vulnerabilities to prevent violent extremism before it takes root.",
+      title: "Inclusivity",
+      description: "To promote inclusivity in PCVE by incorporating intersectionalities including gender, youth, disability and marginalisation.",
       link: "See All Programs"
     },
     {

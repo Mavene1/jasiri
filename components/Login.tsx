@@ -79,7 +79,7 @@ const Login: React.FC = () => {
 
                     <div className="relative">
                         <Image
-                            src="/images/1.png"
+                            src="/images/kenya1.png"
                             alt="Jasiri Community"
                             className="w-80 h-80 object-cover rounded-full shadow-2xl border-8 border-white"
                             width={320}
