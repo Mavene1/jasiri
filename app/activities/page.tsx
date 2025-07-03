@@ -9,7 +9,7 @@ const page = () => {
     <div className="min-h-screen bg-white">
       <Header />
       <ActivitiesPage /> 
-      <CTASection />
+      {/* <CTASection /> */}
       <Footer />
     </div>
   )

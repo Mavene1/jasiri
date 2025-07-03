@@ -18,7 +18,7 @@ export default function Home() {
       <Campaigns />
       <Stats />
       <Blog /> 
-      <CTASection />
+      {/* <CTASection /> */}
       <Footer />
     </div>
   );

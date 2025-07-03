@@ -10,7 +10,7 @@ const Blog = () => {
       date: "20 Jan, 2025",
       title: "Providing Food, Clean Water, and Medical Care to Those Who Need",
       excerpt: "Ensuring no child suffers from hunger, thirst, or lack of medical care—because every life matters.",
-      image: "/images/4.png",
+      image: "/images/kenya4.png",
       category: "Healthcare",
       readTime: "5 min read",
       author: "Jasiri Team"
@@ -20,7 +20,7 @@ const Blog = () => {
       date: "25 Jan, 2025",
       title: "No One Should Go Hungry, Thirsty, or Without Treatment",
       excerpt: "Providing essential food, clean water, and life-saving treatment to build a healthier future.",
-      image: "/images/3.png",
+      image: "/images/kenya3.png",
       category: "Nutrition",
       readTime: "4 min read",
       author: "Jasiri Team"
@@ -30,7 +30,7 @@ const Blog = () => {
       date: "30 Jan, 2025",
       title: "Nutritious Meals, Safe Water, and Healthcare to Every Child in Need",
       excerpt: "Together, we can nourish, heal, and bring hope to those who need it the most",
-      image: "/images/2.png",
+      image: "/images/kenya2.png",
       category: "Child Welfare",
       readTime: "6 min read",
       author: "Jasiri Team"
