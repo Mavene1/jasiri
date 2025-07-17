@@ -7,6 +7,7 @@ import { clearAuthToken, setAuthToken } from '../util/auth';
 import { signinSchema, signupSchema } from '../validations/validations';
 import { z } from 'zod';
 import { jwtDecode } from 'jwt-decode';
+import { decodeJwtToken } from '../util/decodeJwt';
 
 interface LoginRequest {
   email: string;
@@ -20,16 +21,16 @@ interface TokenResponse {
   expires_in: number;
 }
 
-interface DecodedUser {
-  email: string;
-  firstName: string;
-  lastName: string;
-  phone?: string;
-  role?: string;
-  status?: string;
-  userId: string;
-  [key: string]: any;
-}
+// interface DecodedUser {
+//   email: string;
+//   firstName: string;
+//   lastName: string;
+//   phone?: string;
+//   role?: string;
+//   status?: string;
+//   userId: string;
+//   [key: string]: any;
+// }
 
 export async function signupAction(data: z.infer<typeof signupSchema>) {
   // Validate with Zod
@@ -165,27 +166,27 @@ export async function loginAction({ email, password }: LoginRequest) {
     }
 
     const data: TokenResponse = await res.json();
-    const decoded: DecodedUser = jwtDecode(data.access_token);
+    const decoded = decodeJwtToken(data.access_token);
 
     await setAuthToken(data.access_token);
 
     return {
       success: true,
       user: {
-        id: decoded.userId,
-        email: decoded.email,
-        firstName: decoded.firstName,
-        lastName: decoded.lastName,
-        phone: decoded.phone,
+        id: decoded?.userId,
+        email: decoded?.email,
+        firstName: decoded?.firstName,
+        lastName: decoded?.lastName,
+        phone: decoded?.phone,
         role: decoded?.role as User['role'] ?? "individual",
-        status: decoded.status,
+        status: decoded?.status,
         createdAt: new Date(),
         updatedAt: new Date(),
-        username: decoded.email,
+        username: decoded?.email,
         avatar: "",
         profileComplete: 25,
         county: "",
-        name: decoded.firstName + ' ' + decoded.lastName,
+        name: decoded?.firstName + ' ' + decoded?.lastName,
       },
       accessToken: data.access_token,
       refreshToken: data.refresh_token,

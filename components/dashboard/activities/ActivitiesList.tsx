@@ -29,6 +29,9 @@ import {
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import PVCEActivityModal from './PVCEActivityModal';
+import { usePriorityAreas, useRoleActivities } from '@/lib/hooks/activities';
+import dayjs from 'dayjs';
+import { useAppStore } from '@/lib/store/useAppStore';
 
 export interface ActivityData {
     activityId: string;
@@ -73,6 +76,13 @@ export default function ActivitiesList() {
     const [deletingActivityId, setDeletingActivityId] = useState<string>('');
     const [globalFilter, setGlobalFilter] = useState('');
     const router = useRouter();
+    const accessToken = useAppStore((state) => state.accessToken);
+
+    const { data, isLoading, isError } = useRoleActivities();
+    console.log("Activities: ", data)
+
+    const { data: priorityAreas, isLoading: priorityAreasLoading, isError: priorityAreasError } = usePriorityAreas();
+    console.log("Priority Areas: ", priorityAreas)
 
     // React Hook Form setup
     const {
@@ -158,7 +168,7 @@ export default function ActivitiesList() {
         setValue('csoId', activity.csoId);
         setValue('scheduledDate', activity.scheduledDate);
         setValue('location', activity.location);
-    }  , [setValue]);
+    }, [setValue]);
 
     const handleDeleteClick = (activityId: string) => {
         setDeletingActivityId(activityId);
@@ -222,19 +232,20 @@ export default function ActivitiesList() {
             }),
             columnHelper.accessor('scheduledDate', {
                 header: 'Date',
-                cell: info => (
-                    <div className="text-sm">
-                        <div className="text-gray-900">
-                            {new Date(info.getValue()).toLocaleDateString()}
+                cell: info => {
+                    const date = dayjs(info.getValue());
+
+                    return (
+                        <div className="text-sm">
+                            <div className="text-gray-900">
+                                {date.format('YYYY-MM-DD')} {/* consistent format */}
+                            </div>
+                            <div className="text-gray-500 text-xs">
+                                {date.format('HH:mm')} {/* 24hr format: 14:00 */}
+                            </div>
                         </div>
-                        <div className="text-gray-500 text-xs">
-                            {new Date(info.getValue()).toLocaleTimeString([], {
-                                hour: '2-digit',
-                                minute: '2-digit'
-                            })}
-                        </div>
-                    </div>
-                ),
+                    );
+                },
             }),
             columnHelper.accessor('status', {
                 header: 'Status',
@@ -669,7 +680,7 @@ export default function ActivitiesList() {
                 </div>
             )}
 
-            {isModalOpen  && (
+            {isModalOpen && (
                 <PVCEActivityModal
                     setIsModalOpen={setIsModalOpen}
                     setIsEditModalOpen={setIsEditModalOpen}
