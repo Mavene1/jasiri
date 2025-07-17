@@ -1,15 +1,16 @@
 // Organization Profile Component
 import React, { useState } from 'react';
 import { Building, Users } from 'lucide-react';
-import { Address, BaseUser, ContactPerson } from './Profile';
+import { Address, ContactPerson } from './Profile';
 import Image from 'next/image';
+import { User } from '@/types';
 
 const organizations = [
     'Kenya Red Cross', 'Amnesty International Kenya', 'Kenya Human Rights Commission',
     'Haki Africa', 'Muslims for Human Rights', 'Centre for Rights Education and Awareness'
 ];
 
-const OrganizationProfile = ({ user, onUpdate }: { user: BaseUser; onUpdate: (data: any) => void }) => {
+const OrganizationProfile = ({ user, onUpdate }: { user: User; onUpdate: (data: any) => void }) => {
     const [joinType, setJoinType] = useState<'join' | 'add'>('join');
     const [selectedOrg, setSelectedOrg] = useState('');
     const [orgData, setOrgData] = useState({

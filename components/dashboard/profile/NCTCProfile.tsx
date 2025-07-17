@@ -1,8 +1,9 @@
 // NCTC Staff Profile Component
 import React, { useState } from 'react';
 import { Camera, Plus, Check, Shield} from 'lucide-react';
-import { BaseUser, registeredUsers } from './Profile';
+import { registeredUsers } from './Profile';
 import Image from 'next/image';
+import { User } from '@/types';
 
 const nctcDepartments = {
     'ICT/Stratcom': ['ICT', 'Media'],
@@ -16,7 +17,7 @@ const nctcDepartments = {
     'Projects': ['Projects']
 };
 
-const NCTCProfile = ({ user, onUpdate }: { user: BaseUser; onUpdate: (data: any) => void }) => {
+const NCTCProfile = ({ user, onUpdate }: { user: User; onUpdate: (data: any) => void }) => {
     const [formData, setFormData] = useState({
         bio: '',
         branch: '',

@@ -64,19 +64,22 @@ export async function signupAction(data: z.infer<typeof signupSchema>) {
 
     return {
       success: true,
-      message: 'Account created successfully!',
+      message: 'User Account created successfully!',
       user: {
         id: Date.now().toString(),
         name: `${firstName} ${lastName}`,
         email,
         username: email,
-        role: 'nctc' as User['role'],
+        role: 'individual' as User['role'],
         firstName,
         lastName,
-        mobile,
+        phone: mobile,
         county,
         createdAt: new Date(),
         updatedAt: new Date(),
+        avatar: "",
+        profileComplete: 25,
+        status: "active",
       }
     };
 

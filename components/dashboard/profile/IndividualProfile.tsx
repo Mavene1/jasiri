@@ -1,10 +1,11 @@
 // Individual PCVE Actor Profile Component
 import React, { useState } from 'react';
 import { Camera, Plus, Check, UserCheck} from 'lucide-react';
-import { BaseUser, registeredUsers } from './Profile';
+import { registeredUsers } from './Profile';
 import Image from 'next/image';
+import { User } from '@/types';
 
-const IndividualProfile = ({ user, onUpdate }: { user: BaseUser; onUpdate: (data: any) => void }) => {
+const IndividualProfile = ({ user, onUpdate }: { user: User; onUpdate: (data: any) => void }) => {
     const [formData, setFormData] = useState({
         bio: '',
         idPassportNumber: '',

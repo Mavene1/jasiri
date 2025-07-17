@@ -14,7 +14,7 @@ interface AppState {
   error: string | null;
   
   // Actions
-  setUser: (user: User) => void;
+  setUser: (user: User | null) => void;
   setAccessToken: (accessToken: string | null) => void;
   setRefreshToken: (refreshToken: string | null) => void;
   logout: () => void;
@@ -35,7 +35,7 @@ export const useAppStore = create<AppState>()(
       error: null,
 
       // Actions
-      setUser: (user: User) => set({ user, isAuthenticated: !!user }),
+      setUser: (user: User | null) => set({ user, isAuthenticated: !!user }),
       setAccessToken: (accessToken) => set({ accessToken }),
       setRefreshToken: (refreshToken) => set({ refreshToken }),
       logout: () => set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false }),

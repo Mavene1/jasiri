@@ -6,6 +6,7 @@ import { useAppStore } from '../store/useAppStore';
 import { loginAction } from '../actions/auth';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { User } from '@/types';
 
 export const useLoginMutation = () => {
   const setUser = useAppStore((state) => state.setUser);
@@ -17,7 +18,7 @@ export const useLoginMutation = () => {
     mutationFn: loginAction,
     onSuccess: (response) => {
       if (response.success && response.user && response.accessToken && response.refreshToken) {
-        setUser(response.user);
+        setUser(response.user as User);
         setAccessToken(response.accessToken);
         setRefreshToken(response.refreshToken);
         toast.success('Sign in successful');

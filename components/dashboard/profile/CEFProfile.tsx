@@ -1,15 +1,16 @@
 // CEF Secretariat Profile Component
 import React, { useState } from 'react';
 import { Plus, X, Check, Building } from 'lucide-react';
-import { BaseUser, ContactPerson, registeredUsers } from './Profile';
+import { ContactPerson, registeredUsers } from './Profile';
 import Image from 'next/image';
+import { User } from '@/types';
 
 const cefSecretariats = [
     'Nairobi CEF Secretariat', 'Mombasa CEF Secretariat', 'Nakuru CEF Secretariat',
     'Eldoret CEF Secretariat', 'Kisumu CEF Secretariat'
 ];
 
-const CEFProfile = ({ user, onUpdate }: { user: BaseUser; onUpdate: (data: any) => void }) => {
+const CEFProfile = ({ user, onUpdate }: { user: User; onUpdate: (data: any) => void }) => {
     const [formData, setFormData] = useState({
         selectedSecretariat: '',
         contactPersons: [] as ContactPerson[],
