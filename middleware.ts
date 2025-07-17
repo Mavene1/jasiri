@@ -4,6 +4,7 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value;
+  console.log("Middleware token: ", token);
 
   const isProtected = request.nextUrl.pathname.startsWith('/dashboard');
 

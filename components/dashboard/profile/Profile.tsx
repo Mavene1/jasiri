@@ -11,13 +11,13 @@ import { useAppStore } from '@/lib/store/useAppStore';
 // Types
 export type UserRole = 'individual' | 'cef' | 'organization' | 'nctc';
 
-export interface BaseUser {
-    id: string;
-    name: string;
-    email: string;
-    role: UserRole;
-    profileComplete: number;
-}
+// export interface BaseUser {
+//     id: string;
+//     name: string;
+//     email: string;
+//     role: UserRole;
+//     profileComplete: number;
+// }
 
 export interface ContactPerson {
     id: string;
@@ -48,14 +48,20 @@ export const registeredUsers = [
 
 // Main Profile Component
 const Profile = () => {
-    // const {user, setUser} = useAppStore((state) => state);
-    const [user, setUser] = useState<BaseUser>({
-        id: '1',
-        name: 'John Doe',
-        email: 'john@example.com',
-        role: 'individual', // This would come from your auth system
-        profileComplete: 25
-    });
+    const { user, setUser } = useAppStore((state) => state);
+    console.log(user)
+    // useEffect(() => {
+    //     if (!user) return;
+    //     const role = user.role;
+    //   }, [user]);
+
+    // const [user, setUser] = useState<BaseUser>({
+    //     id: '1',
+    //     name: 'John Doe',
+    //     email: 'john@example.com',
+    //     role: 'individual', // This would come from your auth system
+    //     profileComplete: 25
+    // });
 
     const [showBadge, setShowBadge] = useState(true);
 
@@ -67,9 +73,16 @@ const Profile = () => {
     ];
 
     const handleRoleChange = (newRole: UserRole) => {
-        setUser({ ...user, role: newRole });
+        if (user) {
+            setUser({
+                ...user,
+                role: newRole,
+                profileComplete: 25
+            });
+        }
+        // setUser({ ...user, role: newRole });
         // Reset profile completion when role changes for demo purposes
-        setUser(prev => ({ ...prev, role: newRole, profileComplete: 25 }));
+        // setUser(prev => ({ ...prev, role: newRole, profileComplete: 25 }));
         setShowBadge(true); // Show badge again when role changes
     };
 
@@ -78,14 +91,14 @@ const Profile = () => {
         let completionPercentage = 25; // Base percentage
 
         // Add logic to calculate percentage based on role and filled fields
-        if (user.role === 'individual') {
+        if (user?.role === 'individual') {
             if (data.bio) completionPercentage += 25;
             if (data.idPassportNumber) completionPercentage += 25;
             if (data.profilePhoto) completionPercentage += 25;
         }
         // Add similar logic for other roles
 
-        setUser({ ...user, profileComplete: Math.min(completionPercentage, 100) });
+        if (user) setUser({ ...user, profileComplete: Math.min(completionPercentage, 100) });
 
         // Here you would save the data to your backend
         console.log('Profile updated:', data);
@@ -133,7 +146,7 @@ const Profile = () => {
     };
 
     const renderRoleSpecificProfile = () => {
-        switch (user.role) {
+        switch (user?.role) {
             case 'individual':
                 return <IndividualProfile user={user} onUpdate={handleProfileUpdate} />;
             case 'cef':
@@ -155,22 +168,22 @@ const Profile = () => {
                     <div className="flex items-center space-x-6 mb-6 md:mb-0">
                         <div className="relative">
                             <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                                {user.name.charAt(0)}
+                                {user?.name.charAt(0)}
                             </div>
                             <div className="absolute -bottom-2 -right-2 bg-white rounded-full p-1 shadow-lg">
-                                {getRoleIcon(user.role)}
+                                {user?.role ? getRoleIcon(user.role) : <Shield className="w-6 h-6" />}
                             </div>
                         </div>
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-800">{user.name}</h1>
-                            <p className="text-gray-600">{user.email}</p>
-                            <p className="text-sm font-medium text-blue-600">{getRoleDisplayName(user.role)}</p>
+                            <h1 className="text-3xl font-bold text-gray-800">{user?.name}</h1>
+                            <p className="text-gray-600">{user?.email}</p>
+                            <p className="text-sm font-medium text-blue-600">{user?.role ? getRoleDisplayName(user?.role) : "User"}</p>
                         </div>
                     </div>
 
                     <div className="relative">
                         <select
-                            value={user.role}
+                            value={user?.role}
                             onChange={(e) => handleRoleChange(e.target.value as UserRole)}
                             className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         >
@@ -195,23 +208,23 @@ const Profile = () => {
                                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                 />
                                 <path
-                                    className={getProgressColor(user.profileComplete)}
+                                    className={user?.profileComplete ? getProgressColor(user?.profileComplete) : "bg-green-500"}
                                     stroke="currentColor"
                                     strokeWidth="3"
                                     strokeLinecap="round"
                                     fill="transparent"
-                                    strokeDasharray={`${user.profileComplete}, 100`}
+                                    strokeDasharray={`${user?.profileComplete}, 100`}
                                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                 />
                             </svg>
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <span className="text-xl font-bold text-gray-700">{user.profileComplete}%</span>
+                                <span className="text-xl font-bold text-gray-700">{user?.profileComplete}%</span>
                             </div>
                         </div>
                         <p className="text-sm text-gray-600">Profile Complete</p>
 
                         {/* Update Profile Badge */}
-                        {showBadge && user.profileComplete < 100 && (
+                        {showBadge && (user?.profileComplete ?? 25) < 100 && (
                             <div className="mt-3 relative">
                                 <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg animate-pulse">
                                     <Star className="w-4 h-4" />

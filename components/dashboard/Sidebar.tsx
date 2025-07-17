@@ -266,9 +266,9 @@ const Sidebar = () => {
             {!isCollapsed && (
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate">
-                  {user?.username}
+                  {user?.name}
                 </p>
-                <p className="text-xs text-gray-500 truncate">@{user?.name}</p>
+                <p className="text-xs text-gray-500 truncate">@{user?.email}</p>
               </div>
             )}
           </div>
@@ -281,7 +281,7 @@ const Sidebar = () => {
             >
               <div className="px-4 py-3 border-b border-gray-100">
                 <p className="text-sm text-gray-500">Signed in as</p>
-                <p className="text-sm font-medium">{user?.username}</p>
+                <p className="text-sm font-medium">{user?.name}</p>
               </div>
 
               <div className="py-2">

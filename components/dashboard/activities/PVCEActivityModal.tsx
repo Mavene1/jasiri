@@ -5,11 +5,11 @@ import { ActivityData } from './ActivitiesList';
 import toast from 'react-hot-toast';
 
 interface PCVEActivityModalProps {
-    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    setEditingActivity: React.Dispatch<React.SetStateAction<ActivityData | null>>;
-    // onSubmit: (data: FormData) => void;
-    onCancel: () => void;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditingActivity: React.Dispatch<React.SetStateAction<ActivityData | null>>;
+  // onSubmit: (data: FormData) => void;
+  onCancel: () => void;
 }
 
 // Type definitions
@@ -54,7 +54,6 @@ interface FormData {
   activities: Activity[];
   counties: string[];
   subcounties: string[];
-  csoId: string;
   profileVisibility: 'PUBLIC' | 'PRIVATE' | 'RESTRICTED';
 }
 
@@ -189,16 +188,16 @@ const subcountiesByCounty: Record<string, string[]> = {
 };
 
 const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
-    setIsModalOpen,
-    setIsEditModalOpen,
-    setEditingActivity,
-    // onSubmit,
-    onCancel
+  setIsModalOpen,
+  setIsEditModalOpen,
+  setEditingActivity,
+  // onSubmit,
+  onCancel
 }) => {
   // State management
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  
+
   // Form data state
   const [formData, setFormData] = useState<FormData>({
     priorityArea: '',
@@ -208,9 +207,11 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
     activities: [],
     counties: [],
     subcounties: [],
-    csoId: '',
     profileVisibility: 'PUBLIC'
   });
+
+  const [newOutputName, setNewOutputName] = useState<string>('');
+  const [newOutputDescription, setNewOutputDescription] = useState<string>('');
 
   // Available options based on selections
   const [availableObjectives, setAvailableObjectives] = useState<Objective[]>([]);
@@ -237,7 +238,7 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
 
   useEffect(() => {
     if (formData.counties.length > 0) {
-      const allSubcounties = formData.counties.flatMap(county => 
+      const allSubcounties = formData.counties.flatMap(county =>
         subcountiesByCounty[county] || []
       );
       setAvailableSubcounties(allSubcounties);
@@ -259,28 +260,47 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
     setFormData(prev => {
       const currentArray = (prev[field] as string[]) || [];
       let newArray: string[];
-      
+
       if (action === 'add') {
         newArray = [...currentArray, value];
       } else if (action === 'remove') {
         newArray = currentArray.filter(item => item !== value);
       } else { // toggle
-        newArray = currentArray.includes(value) 
+        newArray = currentArray.includes(value)
           ? currentArray.filter(item => item !== value)
           : [...currentArray, value];
       }
-      
+
       return { ...prev, [field]: newArray };
     });
   };
 
-  const addOutput = (outputId: string) => {
-    const output = predefinedOutputs.find(o => o.id === outputId);
-    if (output && !formData.outputs.find(o => o.id === outputId)) {
+  // const addOutput = (outputId: string) => {
+  //   const output = predefinedOutputs.find(o => o.id === outputId);
+  //   if (output && !formData.outputs.find(o => o.id === outputId)) {
+  //     setFormData(prev => ({
+  //       ...prev,
+  //       outputs: [...prev.outputs, { ...output, activities: [] }]
+  //     }));
+  //   }
+  // };
+
+  const addOutput = () => {
+    if (newOutputName.trim()) {
+      const newOutput: OutputWithActivities = {
+        id: `custom_${Date.now()}`,
+        name: newOutputName.trim(),
+        description: newOutputDescription.trim(),
+        activities: []
+      };
+      
       setFormData(prev => ({
         ...prev,
-        outputs: [...prev.outputs, { ...output, activities: [] }]
+        outputs: [...prev.outputs, newOutput]
       }));
+      
+      setNewOutputName('');
+      setNewOutputDescription('');
     }
   };
 
@@ -293,18 +313,18 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
 
   const addActivity = (outputId: string, activity: NewActivity) => {
     if (!activity.title.trim()) return;
-    
+
     setFormData(prev => ({
       ...prev,
-      outputs: prev.outputs.map(output => 
-        output.id === outputId 
-          ? { 
-              ...output, 
-              activities: [...output.activities, { 
-                id: Date.now() + Math.random(), 
-                ...activity 
-              }] 
-            }
+      outputs: prev.outputs.map(output =>
+        output.id === outputId
+          ? {
+            ...output,
+            activities: [...output.activities, {
+              id: Date.now() + Math.random(),
+              ...activity
+            }]
+          }
           : output
       )
     }));
@@ -313,12 +333,12 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
   const removeActivity = (outputId: string, activityId: number) => {
     setFormData(prev => ({
       ...prev,
-      outputs: prev.outputs.map(output => 
-        output.id === outputId 
-          ? { 
-              ...output, 
-              activities: output.activities.filter(a => a.id !== activityId) 
-            }
+      outputs: prev.outputs.map(output =>
+        output.id === outputId
+          ? {
+            ...output,
+            activities: output.activities.filter(a => a.id !== activityId)
+          }
           : output
       )
     }));
@@ -326,7 +346,7 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
 
   const validateStep = (step: number): boolean => {
     const newErrors: ValidationErrors = {};
-    
+
     switch (step) {
       case 1:
         if (!formData.priorityArea) newErrors.priorityArea = 'Priority Area is required';
@@ -344,10 +364,10 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
       case 3:
         if (formData.counties.length === 0) newErrors.counties = 'At least one county is required';
         if (formData.subcounties.length === 0) newErrors.subcounties = 'At least one subcounty is required';
-        if (!formData.csoId) newErrors.csoId = 'CSO ID is required';
+        // if (!formData.csoId) newErrors.csoId = 'CSO ID is required';
         break;
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -364,15 +384,15 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
 
   const handleSubmit = async () => {
     if (!validateStep(currentStep)) return;
-    
+
     setIsSubmitting(true);
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       console.log('PCVE Action Data:', formData);
       toast.success('PCVE Action saved successfully!');
-      
+
       // Reset form and close modal
       setFormData({
         priorityArea: '',
@@ -382,7 +402,7 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
         activities: [],
         counties: [],
         subcounties: [],
-        csoId: '',
+        // csoId: '',
         profileVisibility: 'PUBLIC'
       });
       setCurrentStep(1);
@@ -399,17 +419,15 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
     <div className="flex items-center justify-center mb-8">
       {[1, 2, 3, 4].map((step) => (
         <div key={step} className="flex items-center">
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-            step <= currentStep 
-              ? 'bg-purple-600 text-white' 
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${step <= currentStep
+              ? 'bg-purple-600 text-white'
               : 'bg-gray-200 text-gray-600'
-          }`}>
+            }`}>
             {step}
           </div>
           {step < 4 && (
-            <div className={`w-12 h-1 mx-2 ${
-              step < currentStep ? 'bg-purple-600' : 'bg-gray-200'
-            }`} />
+            <div className={`w-12 h-1 mx-2 ${step < currentStep ? 'bg-purple-600' : 'bg-gray-200'
+              }`} />
           )}
         </div>
       ))}
@@ -421,7 +439,7 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
       <h3 className="text-lg font-semibold text-gray-900 mb-4">
         Step 1: Select Priority Area, Objective & Outcome
       </h3>
-      
+
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           <Building className="w-4 h-4 inline mr-2" />
@@ -492,31 +510,40 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
       
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Select Outputs *
+          Add New Output *
         </label>
-        <div className="border border-gray-300 rounded-lg p-4 max-h-40 overflow-y-auto">
-          {predefinedOutputs.map(output => (
-            <div key={output.id} className="flex items-center justify-between py-2 border-b last:border-b-0">
-              <div>
-                <p className="font-medium text-sm">{output.name}</p>
-                <p className="text-xs text-gray-600">{output.description}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => addOutput(output.id)}
-                disabled={!!formData.outputs.find(o => o.id === output.id)}
-                className="px-3 py-1 text-xs bg-purple-600 text-white rounded hover:bg-purple-700 disabled:bg-gray-400"
-              >
-                {formData.outputs.find(o => o.id === output.id) ? 'Added' : 'Add'}
-              </button>
-            </div>
-          ))}
+        <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
+          <div className="grid grid-cols-1 gap-4">
+            <input
+              type="text"
+              placeholder="Output name"
+              value={newOutputName}
+              onChange={(e) => setNewOutputName(e.target.value)}
+              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+            />
+            <textarea
+              placeholder="Output description"
+              value={newOutputDescription}
+              onChange={(e) => setNewOutputDescription(e.target.value)}
+              rows={2}
+              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+            />
+            <button
+              type="button"
+              onClick={addOutput}
+              disabled={!newOutputName.trim()}
+              className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+            >
+              <Plus className="w-4 h-4 mr-1" />
+              Add Output
+            </button>
+          </div>
         </div>
         {errors.outputs && (
           <p className="text-red-500 text-sm mt-1">{errors.outputs}</p>
         )}
       </div>
-
+  
       <div className="space-y-4">
         <h4 className="font-medium text-gray-900">Selected Outputs & Activities</h4>
         {formData.outputs.map((output, outputIndex) => (
@@ -533,11 +560,12 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
       </div>
     </div>
   );
-
+  
+  // 6. Update renderStep3 - remove CSO ID section
   const renderStep3 = () => (
     <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">
-        Step 3: Select Counties, Subcounties & CSO Details
+        Step 3: Select Counties & Subcounties
       </h3>
       
       <div>
@@ -562,7 +590,7 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
           <p className="text-red-500 text-sm mt-1">{errors.counties}</p>
         )}
       </div>
-
+  
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Subcounties *
@@ -584,32 +612,135 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
           <p className="text-red-500 text-sm mt-1">{errors.subcounties}</p>
         )}
       </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          <User className="w-4 h-4 inline mr-2" />
-          CSO ID *
-        </label>
-        <input
-          type="text"
-          value={formData.csoId}
-          onChange={(e) => handleInputChange('csoId', e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
-          placeholder="Enter CSO ID (e.g., 123A)"
-        />
-        {errors.csoId && (
-          <p className="text-red-500 text-sm mt-1">{errors.csoId}</p>
-        )}
-      </div>
     </div>
   );
+
+  // const renderStep2 = () => (
+  //   <div className="space-y-6">
+  //     <h3 className="text-lg font-semibold text-gray-900 mb-4">
+  //       Step 2: Add Outputs & Activities
+  //     </h3>
+
+  //     <div>
+  //       <label className="block text-sm font-medium text-gray-700 mb-2">
+  //         Select Outputs *
+  //       </label>
+  //       <div className="border border-gray-300 rounded-lg p-4 max-h-40 overflow-y-auto">
+  //         {predefinedOutputs.map(output => (
+  //           <div key={output.id} className="flex items-center justify-between py-2 border-b last:border-b-0">
+  //             <div>
+  //               <p className="font-medium text-sm">{output.name}</p>
+  //               <p className="text-xs text-gray-600">{output.description}</p>
+  //             </div>
+  //             <button
+  //               type="button"
+  //               onClick={() => addOutput(output.id)}
+  //               disabled={!!formData.outputs.find(o => o.id === output.id)}
+  //               className="px-3 py-1 text-xs bg-purple-600 text-white rounded hover:bg-purple-700 disabled:bg-gray-400"
+  //             >
+  //               {formData.outputs.find(o => o.id === output.id) ? 'Added' : 'Add'}
+  //             </button>
+  //           </div>
+  //         ))}
+  //       </div>
+  //       {errors.outputs && (
+  //         <p className="text-red-500 text-sm mt-1">{errors.outputs}</p>
+  //       )}
+  //     </div>
+
+  //     <div className="space-y-4">
+  //       <h4 className="font-medium text-gray-900">Selected Outputs & Activities</h4>
+  //       {formData.outputs.map((output, outputIndex) => (
+  //         <OutputActivitySection
+  //           key={output.id}
+  //           output={output}
+  //           outputIndex={outputIndex}
+  //           onRemoveOutput={() => removeOutput(output.id)}
+  //           onAddActivity={(activity) => addActivity(output.id, activity)}
+  //           onRemoveActivity={(activityId) => removeActivity(output.id, activityId)}
+  //           errors={errors}
+  //         />
+  //       ))}
+  //     </div>
+  //   </div>
+  // );
+
+  // const renderStep3 = () => (
+  //   <div className="space-y-6">
+  //     <h3 className="text-lg font-semibold text-gray-900 mb-4">
+  //       Step 3: Select Counties, Subcounties & CSO Details
+  //     </h3>
+
+  //     <div>
+  //       <label className="block text-sm font-medium text-gray-700 mb-2">
+  //         <MapPin className="w-4 h-4 inline mr-2" />
+  //         Counties *
+  //       </label>
+  //       <div className="border border-gray-300 rounded-lg p-4 max-h-40 overflow-y-auto">
+  //         {counties.map(county => (
+  //           <label key={county} className="flex items-center py-1">
+  //             <input
+  //               type="checkbox"
+  //               checked={formData.counties.includes(county)}
+  //               onChange={() => handleArrayChange('counties', county)}
+  //               className="mr-2"
+  //             />
+  //             <span className="text-sm">{county}</span>
+  //           </label>
+  //         ))}
+  //       </div>
+  //       {errors.counties && (
+  //         <p className="text-red-500 text-sm mt-1">{errors.counties}</p>
+  //       )}
+  //     </div>
+
+  //     <div>
+  //       <label className="block text-sm font-medium text-gray-700 mb-2">
+  //         Subcounties *
+  //       </label>
+  //       <div className="border border-gray-300 rounded-lg p-4 max-h-40 overflow-y-auto">
+  //         {availableSubcounties.map(subcounty => (
+  //           <label key={subcounty} className="flex items-center py-1">
+  //             <input
+  //               type="checkbox"
+  //               checked={formData.subcounties.includes(subcounty)}
+  //               onChange={() => handleArrayChange('subcounties', subcounty)}
+  //               className="mr-2"
+  //             />
+  //             <span className="text-sm">{subcounty}</span>
+  //           </label>
+  //         ))}
+  //       </div>
+  //       {errors.subcounties && (
+  //         <p className="text-red-500 text-sm mt-1">{errors.subcounties}</p>
+  //       )}
+  //     </div>
+
+  //     <div>
+  //       <label className="block text-sm font-medium text-gray-700 mb-2">
+  //         <User className="w-4 h-4 inline mr-2" />
+  //         CSO ID *
+  //       </label>
+  //       <input
+  //         type="text"
+  //         value={formData.csoId}
+  //         onChange={(e) => handleInputChange('csoId', e.target.value)}
+  //         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+  //         placeholder="Enter CSO ID (e.g., 123A)"
+  //       />
+  //       {errors.csoId && (
+  //         <p className="text-red-500 text-sm mt-1">{errors.csoId}</p>
+  //       )}
+  //     </div>
+  //   </div>
+  // );
 
   const renderStep4 = () => (
     <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">
         Step 4: Profile Visibility & Review
       </h3>
-      
+
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Profile Visibility
@@ -635,14 +766,14 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
           <p><strong>Total Activities:</strong> {formData.outputs.reduce((acc, output) => acc + output.activities.length, 0)}</p>
           <p><strong>Counties:</strong> {formData.counties.join(', ')}</p>
           <p><strong>Subcounties:</strong> {formData.subcounties.join(', ')}</p>
-          <p><strong>CSO ID:</strong> {formData.csoId}</p>
+          {/* <p><strong>CSO ID:</strong> {formData.csoId}</p> */}
           <p><strong>Visibility:</strong> {formData.profileVisibility}</p>
         </div>
       </div>
     </div>
   );
 
-//   if (!isModalOpen) return null;
+  //   if (!isModalOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -677,7 +808,7 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
           >
             Previous
           </button>
-          
+
           <div className="flex items-center space-x-4">
             <button
               type="button"
@@ -686,7 +817,7 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
             >
               Cancel
             </button>
-            
+
             {currentStep < 4 ? (
               <button
                 type="button"
@@ -716,13 +847,13 @@ const PCVEActivityModal: React.FC<PCVEActivityModalProps> = ({
 };
 
 // Component for Output and Activity Management
-const OutputActivitySection: React.FC<OutputActivitySectionProps> = ({ 
-  output, 
-  outputIndex, 
-  onRemoveOutput, 
-  onAddActivity, 
-  onRemoveActivity, 
-  errors 
+const OutputActivitySection: React.FC<OutputActivitySectionProps> = ({
+  output,
+  outputIndex,
+  onRemoveOutput,
+  onAddActivity,
+  onRemoveActivity,
+  errors
 }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
   const [newActivity, setNewActivity] = useState<NewActivity>({
@@ -764,7 +895,7 @@ const OutputActivitySection: React.FC<OutputActivitySectionProps> = ({
       {isExpanded && (
         <div className="space-y-4">
           <p className="text-sm text-gray-600">{output.description}</p>
-          
+
           <div className="bg-gray-50 rounded-lg p-4">
             <h6 className="font-medium text-gray-900 mb-3">Add Activity</h6>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -848,7 +979,7 @@ const OutputActivitySection: React.FC<OutputActivitySectionProps> = ({
               </div>
             </div>
           )}
-          
+
           {errors[`output_${outputIndex}_activities`] && (
             <p className="text-red-500 text-sm">{errors[`output_${outputIndex}_activities`]}</p>
           )}

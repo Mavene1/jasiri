@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers';
 
 export async function setAuthToken(token: string) {
-  (await cookies()).set('token', token, { httpOnly: true, secure: true, sameSite: 'strict' });
+  (await cookies()).set('token', token, { httpOnly: true, secure: true, sameSite: 'strict', path: '/' });
 }
 
 export async function clearAuthToken() {

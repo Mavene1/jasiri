@@ -9,6 +9,7 @@ import { useAppStore } from '@/lib/store/useAppStore';
 import { useRouter } from 'next/navigation';
 import { loginAction } from '@/lib/actions/auth';
 import toast from 'react-hot-toast';
+import { useLoginMutation } from '@/lib/hooks/useLoginMutation';
 
 interface LoginFormData {
     email: string;
@@ -23,6 +24,7 @@ const Login: React.FC = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const setUser = useAppStore((state) => state.setUser);
     const router = useRouter();
+    const { mutateAsync, isPending: isLoginPending } = useLoginMutation();
 
     const {
         register,
@@ -33,19 +35,25 @@ const Login: React.FC = () => {
 
     console.log(errors, watch())
 
+    // const onSubmit = async (data: LoginFormData) => {
+    //     startTransition(async () => {
+    //         const result = await loginAction(data);
+    //         if (result.success) {
+    //             setUser(result.user);
+    //             toast.success('Sign in successful');
+    //             router.push('/dashboard/profile');
+    //         } else {
+    //             toast.error(result.message);
+    //             setErrorMsg('');
+    //         }
+    //     });
+    //     console.log('Login attempt:', data);
+    // };
+
+    
     const onSubmit = async (data: LoginFormData) => {
-        startTransition(async () => {
-            const result = await loginAction(data);
-            if (result.success) {
-                setUser(result.user);
-                toast.success('Sign in successful');
-                router.push('/dashboard/profile');
-            } else {
-                toast.error(result.message);
-                setErrorMsg('');
-            }
-        });
-        console.log('Login attempt:', data);
+        console.log("Login attempt: ",data)
+        await mutateAsync({ email: data.email, password: data.password });
     };
 
     const handleBackToSite = () => {
@@ -194,10 +202,10 @@ const Login: React.FC = () => {
                                 {/* Login Button */}
                                 <button
                                     type="submit"
-                                    disabled={isPending}
+                                    disabled={isLoginPending}
                                     className="w-full bg-gradient-to-r cursor-pointer from-blue-600 to-blue-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-200 shadow-lg"
                                 >
-                                    {isPending ? "Logging in..." : "Secure Login"}
+                                    {isLoginPending ? "Logging in..." : "Secure Login"}
                                 </button>
                             </div>
 
