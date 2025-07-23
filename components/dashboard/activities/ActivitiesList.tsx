@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import {
     Plus,
     X,
@@ -29,9 +29,10 @@ import {
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import PVCEActivityModal from './PVCEActivityModal';
-import { usePriorityAreas, useRoleActivities } from '@/lib/hooks/activities';
+import { useCounties, useOutcomes, usePriorityAreas, useRoleActivities, useSubCounties } from '@/lib/hooks/activities';
 import dayjs from 'dayjs';
 import { useAppStore } from '@/lib/store/useAppStore';
+import toast from 'react-hot-toast';
 
 export interface ActivityData {
     activityId: string;
@@ -83,6 +84,23 @@ export default function ActivitiesList() {
 
     const { data: priorityAreas, isLoading: priorityAreasLoading, isError: priorityAreasError } = usePriorityAreas();
     console.log("Priority Areas: ", priorityAreas)
+
+    const { data: counties1, isLoading: countiesLoading, isError: countiesError } = useCounties();
+    console.log("Counties: ", counties1)
+
+    const { data: outcomes, isLoading: outcomesLoading, isError: outcomesError } = useOutcomes("pillar001");
+    console.log("Outcomes: ", outcomes)
+
+    const { data: subCounties, isLoading: subCountiesLoading, isError: subCountiesError } = useSubCounties("Baringo");
+    console.log("Sub Counties: ", subCounties)
+
+    useEffect(() => {
+        console.log("Activities: ", data)
+        console.log("Priority Areas: ", priorityAreas)
+        console.log("Counties: ", counties1)
+        console.log("Outcomes: ", outcomes)
+        console.log("Sub Counties: ", subCounties)
+    }, []);
 
     // React Hook Form setup
     const {

@@ -21,17 +21,6 @@ interface TokenResponse {
   expires_in: number;
 }
 
-// interface DecodedUser {
-//   email: string;
-//   firstName: string;
-//   lastName: string;
-//   phone?: string;
-//   role?: string;
-//   status?: string;
-//   userId: string;
-//   [key: string]: any;
-// }
-
 export async function signupAction(data: z.infer<typeof signupSchema>) {
   // Validate with Zod
   const validation = signupSchema.safeParse(data);
