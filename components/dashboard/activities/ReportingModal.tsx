@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { X, Upload } from 'lucide-react';
-import { ActivityData } from './ActivitiesList';
+import { ActivityData } from '@/types';
 
 interface Activity {
   id: string;

@@ -9,12 +9,7 @@ import {
     ArrowLeft,
     FileText,
 } from 'lucide-react';
-import { ActivityData, ActivityReport } from './ActivitiesList';
-
-interface ReportDetailsProps {
-    activityId: string
-    reportId: string
-}
+import { ActivityData, ActivityReport, ReportDetailsProps } from '@/types';
 
 export default function ReportDetails({ activityId, reportId }: ReportDetailsProps) {
     const router = useRouter()

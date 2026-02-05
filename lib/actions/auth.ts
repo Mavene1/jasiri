@@ -81,52 +81,52 @@ export async function signupAction(data: z.infer<typeof signupSchema>) {
   }
 }
 
-// export async function loginAction({ email, password }: { email: string; password: string }) {
-//   const validation = signinSchema.safeParse({ email, password });
+export async function loginAction({ email, password }: { email: string; password: string }) {
+  const validation = signinSchema.safeParse({ email, password });
 
-//   if (!validation.success) {
-//     return {
-//       success: false,
-//       user: null,
-//       message: validation.error.errors[0].message
-//     };
-//   }
-//   if (email === 'example@gmail.com' && password === '12345678') {
-//     await setAuthToken('valid-jwt-token');
-//     // (await cookies()).set('token', 'valid-jwt-token', {
-//     //   httpOnly: true,
-//     //   secure: true,
-//     //   sameSite: 'strict',
-//     //   path: '/',
-//     // });
+  if (!validation.success) {
+    return {
+      success: false,
+      user: null,
+      message: validation.error.errors[0].message
+    };
+  }
+  if (email === 'example@gmail.com' && password === '12345678') {
+    await setAuthToken('valid-jwt-token');
+    // (await cookies()).set('token', 'valid-jwt-token', {
+    //   httpOnly: true,
+    //   secure: true,
+    //   sameSite: 'strict',
+    //   path: '/',
+    // });
 
-//     return {
-//       success: true,
-//       user: {
-//         id: '1',
-//         name: 'John Doe',
-//         email,
-//         username: email,
-//         role: 'individual' as User['role'],
-//         firstName: 'John',
-//         lastName: 'Doe',
-//         mobile: '1234567890',
-//         county: 'Nairobi',
-//         createdAt: new Date(),
-//         updatedAt: new Date(),
-//       },
-//       message: 'Login successful',
-//     };
-//   }
+    return {
+      success: true,
+      user: {
+        id: '1',
+        name: 'John Doe',
+        email,
+        username: email,
+        role: 'individual' as User['role'],
+        firstName: 'John',
+        lastName: 'Doe',
+        mobile: '1234567890',
+        county: 'Nairobi',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      message: 'Login successful',
+    };
+  }
 
-//   return {
-//     success: false,
-//     user: null,
-//     message: 'Invalid credentials'
-//   };
-// }
+  return {
+    success: false,
+    user: null,
+    message: 'Invalid credentials'
+  };
+}
 
-export async function loginAction({ email, password }: LoginRequest) {
+export async function loginActionOauth({ email, password }: LoginRequest) {
   const validation = signinSchema.safeParse({ email, password });
   if (!validation.success) {
     return {

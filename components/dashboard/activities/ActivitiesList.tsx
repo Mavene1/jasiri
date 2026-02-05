@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useMemo, useCallback, useEffect} from 'react';
 import {
     Plus,
     X,
@@ -29,45 +29,12 @@ import {
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import PVCEActivityModal from './PVCEActivityModal';
-import { useCounties, useOutcomes, usePriorityAreas, useRoleActivities, useSubCounties } from '@/lib/hooks/activities';
+import { useActivityReports, useCounties, useDownloadReport, useOutcomes, usePriorityAreas, useRoleActivities, useSubCounties } from '@/lib/hooks/activities';
 import dayjs from 'dayjs';
 import { useAppStore } from '@/lib/store/useAppStore';
 import toast from 'react-hot-toast';
-
-export interface ActivityData {
-    activityId: string;
-    title: string;
-    description: string;
-    pillar: 'AWARENESS' | 'PREVENTION' | 'PROTECTION' | 'RESPONSE';
-    county: string;
-    createdBy: string;
-    csoId: string;
-    status: 'PENDING' | 'APPROVED' | 'ONGOING' | 'COMPLETED' | 'CANCELLED';
-    scheduledDate: string;
-    targetOutreach: number;
-    location: string;
-    createdAt: string;
-}
-
-export interface ActivityReport {
-    reportId: string;
-    activityId: string;
-    filePath: string;
-    fileName: string;
-    mimeType: string;
-    description: string;
-    uploadedAt: string;
-}
-
-export interface CreateActivityForm {
-    title: string;
-    description: string;
-    pillar: 'AWARENESS' | 'PREVENTION' | 'PROTECTION' | 'RESPONSE';
-    county: string;
-    csoId: string;
-    scheduledDate: string;
-    location: string;
-}
+import { useCreateActivity } from '@/lib/hooks/activities';
+import { ActivityData, CreateActivityForm } from '@/types';
 
 export default function ActivitiesList() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,22 +44,16 @@ export default function ActivitiesList() {
     const [deletingActivityId, setDeletingActivityId] = useState<string>('');
     const [globalFilter, setGlobalFilter] = useState('');
     const router = useRouter();
-    const accessToken = useAppStore((state) => state.accessToken);
+    const accessToken = useAppStore((state) => state.accessToken?? '');
 
-    const { data, isLoading, isError } = useRoleActivities();
-    console.log("Activities: ", data)
-
-    const { data: priorityAreas, isLoading: priorityAreasLoading, isError: priorityAreasError } = usePriorityAreas();
-    console.log("Priority Areas: ", priorityAreas)
-
-    const { data: counties1, isLoading: countiesLoading, isError: countiesError } = useCounties();
-    console.log("Counties: ", counties1)
-
-    const { data: outcomes, isLoading: outcomesLoading, isError: outcomesError } = useOutcomes("pillar001");
-    console.log("Outcomes: ", outcomes)
-
-    const { data: subCounties, isLoading: subCountiesLoading, isError: subCountiesError } = useSubCounties("Baringo");
-    console.log("Sub Counties: ", subCounties)
+    const { mutateAsync: createActivity } = useCreateActivity(accessToken);
+    const { data, isLoading, isError } = useRoleActivities(accessToken);
+    const { data: priorityAreas, isLoading: priorityAreasLoading, isError: priorityAreasError } = usePriorityAreas(accessToken);
+    const { data: counties1, isLoading: countiesLoading, isError: countiesError } = useCounties(accessToken);
+    const { data: outcomes, isLoading: outcomesLoading, isError: outcomesError } = useOutcomes(accessToken, "pillar001");
+    const { data: subCounties, isLoading: subCountiesLoading, isError: subCountiesError } = useSubCounties(accessToken, "Baringo");
+    const { data: activityReports, isLoading: activityReportsLoading, isError: activityReportsError } = useActivityReports(accessToken, "91bfbfaa-23a5-449d-8648-0fe7569baeaa");
+    const { data: downloadReport, isLoading: downloadReportLoading, isError: downloadReportError } = useDownloadReport(accessToken, "5ec1d541-80e0-4008-bd93-8072fb57aeaf");
 
     useEffect(() => {
         console.log("Activities: ", data)
@@ -100,7 +61,9 @@ export default function ActivitiesList() {
         console.log("Counties: ", counties1)
         console.log("Outcomes: ", outcomes)
         console.log("Sub Counties: ", subCounties)
-    }, []);
+        console.log("Activity Reports: ", activityReports)
+        console.log("Download Report: ", downloadReport)
+    }, [data, priorityAreas, counties1, outcomes, subCounties, activityReports, downloadReport]);
 
     // React Hook Form setup
     const {

@@ -12,7 +12,7 @@ import {
     Target
 } from 'lucide-react';
 import { useRouter } from 'next/navigation'
-import { ActivityData, ActivityReport } from './ActivitiesList';
+import { ActivityData, ActivityReport } from '@/types';
 import { ReportingModal } from './ReportingModal';
 
 interface ActivityDetailsProps {

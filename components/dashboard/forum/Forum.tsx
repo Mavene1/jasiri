@@ -1,8 +1,10 @@
 'use client'
 
-import React, { useState, useTransition } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import { ActivitySkeleton } from './ActivitySkeleton';
 import { ActivityCard } from './ActivityCard';
+import { useAppStore } from '@/lib/store/useAppStore';
+import { useForumActivities } from '@/lib/hooks/forum';
 
 interface Activity {
   id: number;
@@ -350,6 +352,14 @@ const Forum = () => {
   const [activities, setActivities] = useState<Activity[]>(mockActivities);
   const [isLoading, setIsLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
+
+  const accessToken = useAppStore((state) => state.accessToken?? '');
+
+  const { data, isLoading: forumActivitiesLoading, isError: forumActivitiesError } = useForumActivities(accessToken);
+
+  useEffect(() => {
+    console.log("Forum Activities: ", data)
+  }, [data]);
 
   const handleLike = async (activityId: number) => {
     // Optimistic update

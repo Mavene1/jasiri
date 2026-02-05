@@ -47,3 +47,43 @@ export interface User {
     createdAt: Date;
     updatedAt: Date;
   }
+
+  export interface ActivityData {
+      activityId: string;
+      title: string;
+      description: string;
+      pillar: 'AWARENESS' | 'PREVENTION' | 'PROTECTION' | 'RESPONSE';
+      county: string;
+      createdBy: string;
+      csoId: string;
+      status: 'PENDING' | 'APPROVED' | 'ONGOING' | 'COMPLETED' | 'CANCELLED';
+      scheduledDate: string;
+      targetOutreach: number;
+      location: string;
+      createdAt: string;
+  }
+  
+  export interface ActivityReport {
+      reportId: string;
+      activityId: string;
+      filePath: string;
+      fileName: string;
+      mimeType: string;
+      description: string;
+      uploadedAt: string;
+  }
+  
+  export interface CreateActivityForm {
+      title: string;
+      description: string;
+      pillar: 'AWARENESS' | 'PREVENTION' | 'PROTECTION' | 'RESPONSE';
+      county: string;
+      csoId: string;
+      scheduledDate: string;
+      location: string;
+  }
+
+  export interface ReportDetailsProps {
+    activityId: string
+    reportId: string
+}
